@@ -136,22 +136,49 @@ alert(`Сумма набраных баллов = ${totalPoints} `);*/
 
 /////////////////////////////////////////////// ЗАДАЧА - 5 ////////////////////////////////////////////////////////////
 
+// 'use strict'
+//
+// let num1 = -100;
+// let num2 = -30;
+//
+// const result = function(a, b) {
+//     if(a >= 0 && b >= 0)
+//         return(a - b);
+//     else if(a < 0 && b < 0)
+//         return(a * b);
+//     else if(a < 0 && b >=0 || a >= 0 && b < 0)
+//         return(a + b);
+//     else('Неверный параметр');
+// }
+// console.log(result(num1, num2));
+
+/////////////////////////////////////////////// ЗАДАЧА - 6 ////////////////////////////////////////////////////////////
 'use strict'
 
-let num1 = -100;
-let num2 = -30;
+let num1 = 6;
+let num2 = 2;
 
-const result = function(a, b) {
-    if(a >= 0 && b >= 0)
-        return(a - b);
-    else if(a < 0 && b < 0)
-        return(a * b);
-    else if(a < 0 && b >=0 || a >= 0 && b < 0)
-        return(a + b);
-    else('Неверный параметр');
+/// ФУНКЦИЯ СЛОЖЕНИЯ ///
+const result = function summ(a, b) {
+    return a + b;
 }
 console.log(result(num1, num2));
 
+/// ФУНКЦИЯ РАЗНОСТИ ///
+const result2 = function summ(a, b) {
+    return a - b;
+}
+console.log(result2(num1, num2));
 
+/// ФУНКЦИЯ ДЕЛЕНИЯ ///
+const result3 = function summ(a, b) {
+    return a / b;
+}
+console.log(result3(num1, num2));
 
+/// ФУНКЦИЯ УМНОЖЕНИЯ ///
+const result4 = function summ(a, b) {
+    return a * b;
+}
+console.log(result4(num1, num2));
 
