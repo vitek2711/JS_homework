@@ -59,7 +59,7 @@ else if (summ >=500) {
 
 /////////////////////////////////////////////// ЗАДАЧА - 3 ////////////////////////////////////////////////////////////
 
-'use strict'
+/*'use strict'
 
 let answer = '';
 let totalPoints = 0;
@@ -128,8 +128,29 @@ switch (answer) {
     default:
         alert(`Недопустимое значение`);
 }
-alert(`Сумма набраных баллов = ${totalPoints} `);
+alert(`Сумма набраных баллов = ${totalPoints} `);*/
 
+
+
+
+
+/////////////////////////////////////////////// ЗАДАЧА - 5 ////////////////////////////////////////////////////////////
+
+'use strict'
+
+let num1 = -100;
+let num2 = -30;
+
+const result = function(a, b) {
+    if(a >= 0 && b >= 0)
+        return(a - b);
+    else if(a < 0 && b < 0)
+        return(a * b);
+    else if(a < 0 && b >=0 || a >= 0 && b < 0)
+        return(a + b);
+    else('Неверный параметр');
+}
+console.log(result(num1, num2));
 
 
 
