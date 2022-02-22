@@ -5,7 +5,6 @@
 
 let userYear = prompt(`Пожалуйста, введите год`);
 let wysokosny;
-let no = false;
 
 /// Пишем условия ///
 
@@ -133,6 +132,99 @@ alert(`Сумма набраных баллов = ${totalPoints} `);*/
 
 
 
+/////////////////////////////////////////////// ЗАДАЧА - 4////////////////////////////////////////////////////////////
+'use strict'
+
+/// Вводим дату ///
+
+let userDay = 31;
+let userMonth = 12;
+let userYear = 2021;
+
+/// Определяем, является ли год високосным ///
+
+let leapYear = function() {
+    if (userYear % 400 === 0) {  /// является високосным
+        return true;
+    }
+    else if (userYear % 4 === 0) { /// является високосным
+        return true;
+    }
+    else if (userYear % 100 === 0) { /// не является високосным
+        return false;
+    }
+    else {
+        return false;
+    }
+}
+
+/// Определяем следующий день ///
+let getDay = function(day, month) {
+    let result;
+    switch (month) {
+        case 1 :
+        case 3 :
+        case 5 :
+        case 7 :
+        case 8 :
+        case 11 :
+        case 12 :
+            result = day === 31;
+            break;
+        case 4 :
+        case 6 :
+        case 9 :
+            result = day === 31;
+            break;
+        case 2:
+            if (leapYear(userYear) === true && day === 29) { /// 29 февраля (для високосного года)
+                result = true;
+            }
+            else if (leapYear(userYear) === false && day === 28) {  /// 28 февраля (для обычного года)
+                result = true;
+            }
+            else {
+                result = false;
+            }
+            break;
+    }
+    return result;
+}
+
+/// Определяем следующий месяц ///
+let nextMonth = function (month) {
+    if (month === 12 ) {
+        return true;
+    }
+    else if (month >=1 && month < 12) {
+        return false;
+    }
+    else {
+        return(`Введено неверное значение`);
+    }
+}
+
+/// Определяем следующую дату ///
+
+function getNextDate(day, month, year) {
+    if (getDay(day, month) === false) {
+        day += 1;
+    }
+    else if (getDay(day, month) === true) {
+        day = 1;
+        if (nextMonth(month) === false) {
+            month += 1
+        }
+        else if (nextMonth(month) === true) {
+            month = 1;
+            year += 1;
+        }
+    }
+    return `Следующая дата: ${day}. ${month}. ${year}`
+}
+
+console.log(getNextDate(userDay, userMonth, userYear));
+
 
 /////////////////////////////////////////////// ЗАДАЧА - 5 ////////////////////////////////////////////////////////////
 
@@ -153,7 +245,7 @@ alert(`Сумма набраных баллов = ${totalPoints} `);*/
 // console.log(result(num1, num2));
 
 /////////////////////////////////////////////// ЗАДАЧА - 6 ////////////////////////////////////////////////////////////
-'use strict'
+/*'use strict'
 
 let num1 = 6;
 let num2 = 2;
@@ -174,11 +266,11 @@ console.log(result2(num1, num2));
 const result3 = function summ(a, b) {
     return a / b;
 }
-console.log(result3(num1, num2));
+console.log(result3(num1, num2));*/
 
 /// ФУНКЦИЯ УМНОЖЕНИЯ ///
-const result4 = function summ(a, b) {
-    return a * b;
-}
-console.log(result4(num1, num2));
+// const result4 = function summ(a, b) {
+//     return a * b;
+// }
+// console.log(result4(num1, num2));
 
