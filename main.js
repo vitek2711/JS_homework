@@ -138,7 +138,7 @@ alert(`Сумма набраных баллов = ${totalPoints} `);*/
 /// Вводим дату ///
 
 let userDay = 31;
-let userMonth = 12;
+let userMonth = 13;
 let userYear = 2021;
 
 /// Определяем, является ли год високосным ///
@@ -159,6 +159,7 @@ let leapYear = function() {
 }
 
 /// Определяем следующий день ///
+
 let getDay = function(day, month) {
     let result;
     switch (month) {
@@ -174,7 +175,7 @@ let getDay = function(day, month) {
         case 4 :
         case 6 :
         case 9 :
-            result = day === 31;
+            result = day === 30;
             break;
         case 2:
             if (leapYear(userYear) === true && day === 29) { /// 29 февраля (для високосного года)
@@ -192,6 +193,7 @@ let getDay = function(day, month) {
 }
 
 /// Определяем следующий месяц ///
+
 let nextMonth = function (month) {
     if (month === 12 ) {
         return true;
@@ -220,7 +222,7 @@ function getNextDate(day, month, year) {
             year += 1;
         }
     }
-    return `Следующая дата: ${day}. ${month}. ${year}`
+    return `Следующая дата: ${day}. ${month}. ${year}`;
 }
 
 console.log(getNextDate(userDay, userMonth, userYear));
