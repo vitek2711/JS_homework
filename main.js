@@ -8,20 +8,22 @@ let wysokosny;
 
 /// Пишем условия ///
 
-if (userYear % 400 == 0)
+if (userYear % 400 === 0) {
     wysokosny = true;
-else if (userYear % 4 == 0)
+}
+else if (userYear % 4 === 0) {
     wysokosny = true;
-else if (userYear % 100 == 0)
+}
+else if (userYear % 100 === 0) {
     wysokosny = false;
-else
+}
+else {
     wysokosny = false;
+}
 
 /// Результат выводим в консоль ///
 
 alert(`${userYear} год ${(wysokosny? '' : 'не')} является високосным`);*/
-
-
 
 
 /////////////////////////////////////// ЗАДАЧА - 2 ////////////////////////////////////////////////////////////
@@ -133,7 +135,7 @@ alert(`Сумма набраных баллов = ${totalPoints} `);*/
 
 
 /////////////////////////////////////////////// ЗАДАЧА - 4////////////////////////////////////////////////////////////
-'use strict'
+/*'use strict'
 
 /// Вводим дату ///
 
@@ -225,26 +227,31 @@ function getNextDate(day, month, year) {
     return `Следующая дата: ${day}. ${month}. ${year}`;
 }
 
-console.log(getNextDate(userDay, userMonth, userYear));
+console.log(getNextDate(userDay, userMonth, userYear));*/
 
 
 /////////////////////////////////////////////// ЗАДАЧА - 5 ////////////////////////////////////////////////////////////
+/*
+'use strict'
 
-// 'use strict'
-//
-// let num1 = -100;
-// let num2 = -30;
-//
-// const result = function(a, b) {
-//     if(a >= 0 && b >= 0)
-//         return(a - b);
-//     else if(a < 0 && b < 0)
-//         return(a * b);
-//     else if(a < 0 && b >=0 || a >= 0 && b < 0)
-//         return(a + b);
-//     else('Неверный параметр');
-// }
-// console.log(result(num1, num2));
+let num1 = 100;
+let num2 = -30;
+
+const result = function(a, b) {
+    if(a >= 0 && b >= 0) {
+        return (a - b);
+    }
+    else if(a < 0 && b < 0) {
+        return (a * b);
+    }
+    else if(a < 0 && b >=0 || a >= 0 && b < 0) {
+        return (a + b);
+    }
+    else {
+        return ('Неверный параметр');
+    }
+}
+console.log(result(num1, num2));*/
 
 /////////////////////////////////////////////// ЗАДАЧА - 6 ////////////////////////////////////////////////////////////
 /*'use strict'
@@ -268,11 +275,81 @@ console.log(result2(num1, num2));
 const result3 = function summ(a, b) {
     return a / b;
 }
-console.log(result3(num1, num2));*/
+console.log(result3(num1, num2));*!/
 
 /// ФУНКЦИЯ УМНОЖЕНИЯ ///
-// const result4 = function summ(a, b) {
-//     return a * b;
-// }
-// console.log(result4(num1, num2));
+const result4 = function summ(a, b) {
+    return a * b;
+}
+console.log(result4(num1, num2));*/
 
+
+////////////////////////////////////////////// ОСОБЫЕ ЗАДАЧИ ///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////   1   ///////////////////////////////////////////////////////////////
+/*
+
+'use strict'
+
+// Средний балл после 1 этапа //
+
+const dolphinsPoints1 = (96 + 108 + 89) / 3; /// Средний балл Дельфинов
+const coalsPoints1 = (88 + 91 + 110) / 3; /// Средний балл Коалл
+
+// Средний балл после 2 этапа //
+
+const dolphinsPoints2 = (97 + 112 + 101) / 3;
+const coalsPoints2 = (109 + 95 + 123) / 3;
+
+// Средний балл после 3 этапа //
+
+const dolphinsPoints3 = (97 + 112 + 101) / 3;
+const coalsPoints3 = (109 + 95 + 106) / 3;
+
+// Находим победителя после 1 этапа соревнований//
+
+let getWinnerOne = function (dolphinsPoints1, coalsPoints1) {
+    if (dolphinsPoints1 > coalsPoints1 && dolphinsPoints1 >= 100) {
+        return `Doslphins is Winner!!!`;
+    }
+    else if (dolphinsPoints1 < coalsPoints1 && coalsPoints1 >= 100) {
+        return `Coals is Winner!!!`;
+        }
+    else if (dolphinsPoints1 === coalsPoints1 && (dolphinsPoints1 || coalsPoints1 >= 100)) {
+        return `It is Draw!!!`;
+    }
+    else {
+        return `Ни одной команде не удалось одержать победу согласно регламента`
+    }
+}
+console.log(getWinnerOne(dolphinsPoints1,coalsPoints1));
+
+// Находим победителя после 2 этапа соревнований//
+
+let getWinnerTwo = function (dolphinsPoints2, coalsPoints2) {
+    if (dolphinsPoints2 > coalsPoints2 && dolphinsPoints2 > 100) {
+        return `Doslphins is Winner!!!`;
+    }
+    else if (dolphinsPoints2 < coalsPoints2 && coalsPoints2 > 100) {
+        return `Coals is Winner!!!`;
+    }
+    else if (dolphinsPoints2 === coalsPoints2 && (dolphinsPoints2 || coalsPoints2 > 100)) {
+        return `It is Draw!!!`;
+    }
+}
+console.log(getWinnerTwo(dolphinsPoints2, coalsPoints2));
+
+// Находим победителя после 3 этапа соревнований//
+
+let getWinnerThree = function (dolphinsPoints3, coalsPoints3) {
+    if (dolphinsPoints3 > coalsPoints3 && dolphinsPoints > 100) {
+        return `Doslphins is Winner!!!`;
+    }
+    else if (dolphinsPoints3 < coalsPoints3 && coalsPoints3 > 100) {
+        return `Coals is Winner!!!`;
+    }
+    else if (dolphinsPoints3 === coalsPoints3 && (dolphinsPoints3 || coalsPoints3) > 100) {
+        return `It is Draw!!!`;
+    }
+}
+console.log(getWinnerThree(dolphinsPoints3, coalsPoints3));
+*/
