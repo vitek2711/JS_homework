@@ -139,9 +139,19 @@ alert(`Сумма набраных баллов = ${totalPoints} `);*/
 
 /// Вводим дату ///
 
-let userDay = 31;
-let userMonth = 13;
+let userDay = 28;
+let userMonth = 12;
 let userYear = 2021;
+
+/// Создаем функцию проверки месяца на валидность ///
+let getUserMonth = function() {
+    if (userMonth >= 1 && userMonth <= 12) {
+        return userMonth;
+    }
+    else {
+        return `Введен неверный параметр`;
+    }
+}
 
 /// Определяем, является ли год високосным ///
 
@@ -227,7 +237,7 @@ function getNextDate(day, month, year) {
     return `Следующая дата: ${day}. ${month}. ${year}`;
 }
 
-console.log(getNextDate(userDay, userMonth, userYear));*/
+console.log(getNextDate(userDay, getUserMonth(userMonth), userYear));*/
 
 
 /////////////////////////////////////////////// ЗАДАЧА - 5 ////////////////////////////////////////////////////////////
