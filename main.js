@@ -69,3 +69,26 @@ console.log(`В Китае проживает ${populationChina} млн. чел�
 В Индии проживает ${populationIndia} млн. человек, т.е. около ${indiaWorldPercent}% от мировой численности.
 В России проживает ${populationRussia} млн. человек, т.е. около ${russiaWorldPercent}% от мировой численности.`);
 */
+
+
+/// ЗАДАНИЕ 3 ///
+
+// Arrow function //
+
+/*let populationChina = 1441;
+let populationIndia = 1382;
+let populationRussia = 0.140;
+
+let percentageOfWorld = 7900;
+
+let percentageOfWorld3 = (a, b) => a / b *100;
+
+let chinaWorldPercent = parseFloat(percentageOfWorld3(populationChina, percentageOfWorld)).toFixed(2),
+    indiaWorldPercent = parseFloat(percentageOfWorld3(populationIndia, percentageOfWorld)).toFixed(2),
+    russiaWorldPercent = parseFloat(percentageOfWorld3(populationRussia, percentageOfWorld)).toFixed(3);
+
+console.log(`В Китае проживает ${populationChina} млн. человек, т.е. около ${chinaWorldPercent}% от мировой численности.
+В Индии проживает ${populationIndia} млн. человек, т.е. около ${indiaWorldPercent}% от мировой численности.
+В России проживает ${populationRussia} млн. человек, т.е. около ${russiaWorldPercent}% от мировой численности.`);*/
+
+
