@@ -95,7 +95,7 @@ console.log(`В Китае проживает ${populationChina} млн. чел�
 
 /// ЗАДАНИЕ 4 ///
 
-'use strict'
+/*'use strict'
 
 var populationChina = 1441;
 let populationIndia = 1382;
@@ -121,7 +121,41 @@ function describePopulation(country, population) {
 
 describePopulation(china, populationChina),
                   (india, populationIndia),
-                  (russia, populationRussia);
+                  (russia, populationRussia);*/
+
+
+/// ЗАДАНИЕ 5 ///
+
+'use strict '
+
+let populations = [ 1441, 1382, 228, 0.14 ];
+
+let percentageOfWorld = 7900;
+
+// Проверяем, содержит ли в себе массив количество элементов равное 4 //
+if (populations.length === 4) {
+    console.log('Массив содержит в себе 4 элемента');
+}
+else {
+    console.log(`Массив НЕ содержит в себе количество элементов равное 4`);
+}
+
+// Создаем другой массив (процентное содержание населения от общемирового) //
+let percentages = [ ];
+
+// Пишем функцию //
+let percentageOfWorld2 = (a, b) => a / b * 100;
+
+// Выводим значение для каждого порядкового элемента массива. Добавляем значения в начало массива percentages //
+percentages.push(+parseFloat(percentageOfWorld2(populations[0], percentageOfWorld)).toFixed(3));
+percentages.push(+parseFloat(percentageOfWorld2(populations[1], percentageOfWorld)).toFixed(3));
+percentages.push(+parseFloat(percentageOfWorld2(populations[2], percentageOfWorld)).toFixed(3));
+percentages.push(+parseFloat(percentageOfWorld2(populations[3], percentageOfWorld)).toFixed(3));
+
+// Выводим получившийся массив с соответствующими значениями в консоль //
+console.log(percentages);
+
+
 
 
 
