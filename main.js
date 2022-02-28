@@ -1,6 +1,7 @@
 /// МОДУЛЬ 4: ФУНКЦИИ И МАССИВЫ ///
 
 /// ЗАДАНИЕ 1 ///
+
 /*
 'use strict'
 
@@ -28,8 +29,8 @@ console.log(`${finland} ${belarus} ${ukraine}`);*/
 
 
 /// ЗАДАНИЕ 2 ///
-/*
 
+/*
 let populationChina = 1441;
 let populationIndia = 1382;
 let populationRussia = 0.140;
@@ -90,5 +91,40 @@ let chinaWorldPercent = parseFloat(percentageOfWorld3(populationChina, percentag
 console.log(`В Китае проживает ${populationChina} млн. человек, т.е. около ${chinaWorldPercent}% от мировой численности.
 В Индии проживает ${populationIndia} млн. человек, т.е. около ${indiaWorldPercent}% от мировой численности.
 В России проживает ${populationRussia} млн. человек, т.е. около ${russiaWorldPercent}% от мировой численности.`);*/
+
+
+/// ЗАДАНИЕ 4 ///
+
+'use strict'
+
+var populationChina = 1441;
+let populationIndia = 1382;
+let populationRussia = 0.140;
+
+const china = 'China';
+const india = 'India';
+const russia = 'Russia'
+
+let percentageOfWorld = 7900;
+
+let percentageOfWorld3 = (a, b) => a / b *100;
+
+let chinaWorldPercent = parseFloat(percentageOfWorld3(populationChina, percentageOfWorld)).toFixed(2),
+    indiaWorldPercent = parseFloat(percentageOfWorld3(populationIndia, percentageOfWorld)).toFixed(2),
+    russiaWorldPercent = parseFloat(percentageOfWorld3(populationRussia, percentageOfWorld)).toFixed(3);
+
+function describePopulation(country, population) {
+    console.log(`В ${china} проживает ${populationChina} млн. человек, что составляет около ${chinaWorldPercent} % населения мира.`);
+    console.log(`В ${india} проживает ${populationIndia} млн. человек, что составляет около ${indiaWorldPercent} % населения мира.`);
+    console.log(`В ${russia} проживает ${populationRussia} млн. человек, что составляет около ${russiaWorldPercent} % населения мира.`);
+}
+
+describePopulation(china, populationChina),
+                  (india, populationIndia),
+                  (russia, populationRussia);
+
+
+
+
 
 
