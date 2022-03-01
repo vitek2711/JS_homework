@@ -1,163 +1,42 @@
-/// МОДУЛЬ 4: ФУНКЦИИ И МАССИВЫ ///
+/// МОДУЛЬ 5: МЕТОДЫ МАССИВОВ. ОБЪЕКТЫ ///
 
 /// ЗАДАНИЕ 1 ///
-
-/*
 'use strict'
 
-let  country = 'Finland',
-    population = 6,
-    capital = 'Helsinki';
+let neighbours = ['russia', 'ukraine', 'latvian', 'lithuania', 'poland']; // массив с соседями
 
-let country1 = 'Belarus',
-    population1 = 9.5,
-    capital1 = 'Minsk';
+neighbours.push('utopia'); // добавляем новую страну в конец массива
+console.log(neighbours); // выводим новый массив в консоль
 
-let country2 = 'Ukraine',
-    population2 = 40,
-    capital2 = 'Kyiv';
-
-function describeCountry(a, b, c) {
-    return(`There are ${ b } million people living in ${ a }. The capital of ${ a } is ${ c }.`);
-}
-
-let finland = describeCountry(country, population, capital),
-    belarus = describeCountry(country1, population1, capital1),
-    ukraine = describeCountry(country2, population2, capital2);
-
-console.log(`${finland} ${belarus} ${ukraine}`);*/
+neighbours.pop('utopia'); // удаляем распавшуюся страну из конца массива, потому что она распалась (лучше бы это сделала первая страна массива)
+console.log(neighbours); // проверяем. Выводим массив в консоль
 
 
-/// ЗАДАНИЕ 2 ///
+console.log(neighbours.includes ('germany') ); // false возвращает нам, что поиск не оказался успешным и такой страны в массиве нет
 
-/*
-let populationChina = 1441;
-let populationIndia = 1382;
-let populationRussia = 0.140;
-
-let percentageOfWorld = 7900;
-
-//function declaration //
-
-function percentageOfWorld1(a, b ) {
-    return (a / b * 100);
-}
-
-let chinaWorldPercent = parseFloat(percentageOfWorld1(populationChina, percentageOfWorld)).toFixed(2),
-    indiaWorldPercent = parseFloat(percentageOfWorld1(populationIndia, percentageOfWorld)).toFixed(2),
-    russiaWorldPercent = parseFloat(percentageOfWorld1(populationRussia, percentageOfWorld)).toFixed(3);
-
-console.log(`В Китае проживает ${populationChina} млн. человек, т.е. около ${chinaWorldPercent}% от мировой численности.
-В Индии проживает ${populationIndia} млн. человек, т.е. около ${indiaWorldPercent}% от мировой численности.
-В России проживает ${populationRussia} млн. человек, т.е. около ${russiaWorldPercent}% от мировой численности.`);
-
-//function expression //
-
-let populationChina = 1441;
-let populationIndia = 1382;
-let populationRussia = 0.140;
-
-let percentageOfWorld = 7900;
-
-let percentageOfWorld2 = function(a, b) {
-    return a / b * 100;
-}
-let chinaWorldPercent = parseFloat(percentageOfWorld2(populationChina, percentageOfWorld)).toFixed(2),
-    indiaWorldPercent = parseFloat(percentageOfWorld2(populationIndia, percentageOfWorld)).toFixed(2),
-    russiaWorldPercent = parseFloat(percentageOfWorld2(populationRussia, percentageOfWorld)).toFixed(3);
-
-console.log(`В Китае проживает ${populationChina} млн. человек, т.е. около ${chinaWorldPercent}% от мировой численности.
-В Индии проживает ${populationIndia} млн. человек, т.е. около ${indiaWorldPercent}% от мировой численности.
-В России проживает ${populationRussia} млн. человек, т.е. около ${russiaWorldPercent}% от мировой численности.`);
-*/
-
-
-/// ЗАДАНИЕ 3 ///
-
-// Arrow function //
-
-/*let populationChina = 1441;
-let populationIndia = 1382;
-let populationRussia = 0.140;
-
-let percentageOfWorld = 7900;
-
-let percentageOfWorld3 = (a, b) => a / b *100;
-
-let chinaWorldPercent = parseFloat(percentageOfWorld3(populationChina, percentageOfWorld)).toFixed(2),
-    indiaWorldPercent = parseFloat(percentageOfWorld3(populationIndia, percentageOfWorld)).toFixed(2),
-    russiaWorldPercent = parseFloat(percentageOfWorld3(populationRussia, percentageOfWorld)).toFixed(3);
-
-console.log(`В Китае проживает ${populationChina} млн. человек, т.е. около ${chinaWorldPercent}% от мировой численности.
-В Индии проживает ${populationIndia} млн. человек, т.е. около ${indiaWorldPercent}% от мировой численности.
-В России проживает ${populationRussia} млн. человек, т.е. около ${russiaWorldPercent}% от мировой численности.`);*/
-
-
-/// ЗАДАНИЕ 4 ///
-
-/*'use strict'
-
-var populationChina = 1441;
-let populationIndia = 1382;
-let populationRussia = 0.140;
-
-const china = 'China';
-const india = 'India';
-const russia = 'Russia'
-
-let percentageOfWorld = 7900;
-
-let percentageOfWorld3 = (a, b) => a / b *100;
-
-let chinaWorldPercent = parseFloat(percentageOfWorld3(populationChina, percentageOfWorld)).toFixed(2),
-    indiaWorldPercent = parseFloat(percentageOfWorld3(populationIndia, percentageOfWorld)).toFixed(2),
-    russiaWorldPercent = parseFloat(percentageOfWorld3(populationRussia, percentageOfWorld)).toFixed(3);
-
-function describePopulation(country, population) {
-    console.log(`В ${china} проживает ${populationChina} млн. человек, что составляет около ${chinaWorldPercent} % населения мира.`);
-    console.log(`В ${india} проживает ${populationIndia} млн. человек, что составляет около ${indiaWorldPercent} % населения мира.`);
-    console.log(`В ${russia} проживает ${populationRussia} млн. человек, что составляет около ${russiaWorldPercent} % населения мира.`);
-}
-
-describePopulation(china, populationChina),
-                  (india, populationIndia),
-                  (russia, populationRussia);*/
-
-
-/// ЗАДАНИЕ 5 ///
-
-'use strict '
-
-let populations = [ 1441, 1382, 228, 0.14 ];
-
-let percentageOfWorld = 7900;
-
-// Проверяем, содержит ли в себе массив количество элементов равное 4 //
-if (populations.length === 4) {
-    console.log('Массив содержит в себе 4 элемента');
+/// Ищем страну и выводим результат поиска в консоль ///
+if (neighbours.includes ('germany')) {
+    console.log('Такая страна НАЙДЕНА');
 }
 else {
-    console.log(`Массив НЕ содержит в себе количество элементов равное 4`);
+    console.log('Вероятно, это не центральноевропейская страна')
 }
 
-// Создаем другой массив (процентное содержание населения от общемирового) //
-let percentages = [ ];
+/// Ищем индекс страны в массиве ///
+console.log(neighbours.indexOf('russia'));
 
-// Пишем функцию //
-let percentageOfWorld2 = (a, b) => a / b * 100;
+/// Удаляем элемент с таким индексом ///
+neighbours.splice(0, 1);
 
-// Выводим значение для каждого порядкового элемента массива. Добавляем значения в начало массива percentages //
-percentages.push(+parseFloat(percentageOfWorld2(populations[0], percentageOfWorld)).toFixed(3));
-percentages.push(+parseFloat(percentageOfWorld2(populations[1], percentageOfWorld)).toFixed(3));
-percentages.push(+parseFloat(percentageOfWorld2(populations[2], percentageOfWorld)).toFixed(3));
-percentages.push(+parseFloat(percentageOfWorld2(populations[3], percentageOfWorld)).toFixed(3));
+/// Добавляем элемент по полученному индексу ///
+neighbours.splice(0, 0, 'tirania');
+console.log(neighbours);
 
-// Выводим получившийся массив с соответствующими значениями в консоль //
-console.log(percentages);
-
-
-
-
+/*
+/// ИЛИ раз страна находится вначале, то можно использовтаь unshift ///
+neighbours.unshift('tirania');
+console.log(neighbours);
+*/
 
 
 
