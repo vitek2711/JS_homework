@@ -1,7 +1,7 @@
 /// МОДУЛЬ 5: МЕТОДЫ МАССИВОВ. ОБЪЕКТЫ ///
 
 /// ЗАДАНИЕ 1 ///
-'use strict'
+/*'use strict'
 
 let neighbours = ['russia', 'ukraine', 'latvian', 'lithuania', 'poland']; // массив с соседями
 
@@ -32,12 +32,22 @@ neighbours.splice(0, 1);
 neighbours.splice(0, 0, 'tirania');
 console.log(neighbours);
 
-/*
+/!*
 /// ИЛИ раз страна находится вначале, то можно использовтаь unshift ///
 neighbours.unshift('tirania');
 console.log(neighbours);
-*/
+*!/*/
 
 
+/// ЗАДАНИЕ 2///
+'use strict'
 
+const myCountry = {
+    country: 'Belarus',
+    capital: 'Minsk',
+    language: 'belarussian',
+    population: 9.5,
+    neighbours: ['russia', 'ukraine', 'latvian', 'lithuania', 'poland']
+}
+console.log(myCountry);
 
