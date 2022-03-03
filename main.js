@@ -40,6 +40,7 @@ console.log(neighbours);
 
 
 /// ЗАДАНИЕ 2///
+/*
 'use strict'
 
 const myCountry = {
@@ -49,5 +50,27 @@ const myCountry = {
     population: 9.5,
     neighbours: ['russia', 'ukraine', 'latvian', 'lithuania', 'poland']
 }
+console.log(myCountry);
+*/
+
+
+/// ЗАДАНИЕ 3///
+'use strict'
+
+const myCountry = {
+    country: 'Belarus',
+    capital: 'Minsk',
+    language: 'belarussian',
+    population: 9.5,
+    neighbours: ['Russia', 'Ukraine', 'Latvian', 'Lithuania', 'Poland']
+}
+
+console.log(`В ${myCountry['country']} проживает ${myCountry['population']} миллионов русскоязычных людей. 
+Соседние страны:${myCountry['neighbours']} и столица под названием ${myCountry['capital']}.`);
+
+/// Меняем свойство объекта ///
+
+// myCountry.population = 11.5; // Увеличиваем население на 2 миллиона. Используем точки
+myCountry['population'] = 11.5; // Увеличиваем население на 2 миллиона. Используем скобки
 console.log(myCountry);
 
