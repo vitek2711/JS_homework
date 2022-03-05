@@ -55,7 +55,7 @@ console.log(myCountry);
 
 
 /// ЗАДАНИЕ 3///
-'use strict'
+/*'use strict'
 
 const myCountry = {
     country: 'Belarus',
@@ -72,5 +72,39 @@ console.log(`В ${myCountry['country']} проживает ${myCountry['populati
 
 // myCountry.population = 11.5; // Увеличиваем население на 2 миллиона. Используем точки
 myCountry['population'] = 11.5; // Увеличиваем население на 2 миллиона. Используем скобки
-console.log(myCountry);
+console.log(myCountry);*/
+
+/// ЗАДАНИЕ 4///
+
+/*
+'use strict'
+
+const myCountry = {
+    country: 'Belarus',
+    capital: 'Minsk',
+    language: 'belarussian',
+    population: 9.5,
+    neighbours: ['Russia', 'Ukraine', 'Latvian', 'Lithuania', 'Poland'],
+    isIsland: '',
+    describe: function () {
+        return `В ${this.country} проживает ${this.population} миллионов русскоязычных людей. 
+Соседние страны:${this.neighbours} и столица под названием ${this.capital}.`
+    },
+    checkIsland: function () {
+        return this.isIsland = this.neighbours.length < 1;
+    }
+}
+// Проверяем явлияется ли страна островом. Пишем условие //
+/!*const checkIsland = (myCountry.neighbours.length >=1 ) ? 'Старана не является осторовом.' : 'Страна является островом.';*!/
+
+// Описание страны выводим в консоль
+console.log(myCountry.describe())
+
+// Выводим в консоль результат проверки
+console.log(myCountry.checkIsland());
+
+console.log(myCountry.isIsland);
+*/
+
+
 
