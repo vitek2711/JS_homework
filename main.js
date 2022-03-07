@@ -21,14 +21,45 @@ const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // сосдаем массив �
 
 /// ЗАДАНИЕ 2 ///
 
-var string = ""
+/*
+var string = ''
 console.log(string);
 for(var x = 0; x < 20; x++) {
-    console.log(string += "X");
+    console.log(string += 'X');
 }
+*/
 
+/// ЗАДАНИЕ 3 ///
 
-
+const post = {
+    author: 'John', // Вывести этот текст
+    postId: 23,
+    comments: [
+        {
+            userId: 10,
+            userName: 'Alex',
+            text: 'Lorem ipsum',
+            rating: {
+                likes: 10,
+                dislikes: 2 // Вывести это число
+            }
+        },
+        {
+            userId: 5, // Вывести это число
+            userName: 'Jane',
+            text: 'Lorem ipsum 2', // Вывести этот текст
+            rating: {
+                likes: 3,
+                dislikes: 1
+            }
+        },
+    ]
+};
+// Выводим в консоль необходимы данные 
+console.log(post.author);
+console.log(post.comments[0].rating.dislikes);
+console.log(post.comments[1].userId);
+console.log(post.comments[1].text)
 
 
 
