@@ -63,11 +63,59 @@ console.log(post.comments[1].text)*/
 /// ЗАДАНИЕ 4 ///
 
 // Пишем цикл в цикле //
-for (let i = 1; i <= 9; i++) {
+/*for (let i = 1; i <= 9; i++) {
     for (let k = 1; k<=10; k++){
         console.log(`${i} * ${k} = ${i*k}`);
     }
     console.log(`****************`); // разделитель
+}*/
+
+/// ЗАДАНИЕ 5 ///
+
+
+/*const time = {
+    h: 0,
+    m: 0,
+    s: 0,
+     timeNow() {      // Функция вывода времени
+        console.log(this.h, this.m, this.s);
+    },
+    changehours(hour) {
+      this.h += hour;
+      return time;
+    },
+    changemin(min) {
+        let hours = min / 60;
+        this.h += Math.floor(hours);
+        this.m += min - (Math.floor(hours) * 60);
+        if (this.m >= 60) {
+            this.m %= 60;
+            this.h = this.h +  (Math.floor(hours) / 60);
+        }
+        return time;
+    },
+    changesec(sec) {
+        let hours = sec / 3600;
+        this.h += Math.floor(hours);
+        let minutes = (sec - Math.floor(hours) * 3600) / 60;
+        this.m += Math.floor(minutes)
+        this.s = sec - (Math.floor(hours) * 3600) - (Math.floor(minutes) * 60);
+
+        if (this.s >= 60) {
+            this.s %= 60;
+            this.m += Math.floor(this.s / 60);
+        }
+        if (this.m >= 60) {
+            this.m %= 60;
+            this.h += Math.floor(this.m / 60);
+        }
+        return time;
+    },
 }
+
+console.log(time.changehours(2)); // Изменение часов
+console.log(time.changemin(7)); // Изменения минут
+console.log(time.changesec(2)); // Изменение секунд*/
+
 
 
