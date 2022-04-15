@@ -1,141 +1,143 @@
 'use strict'
+// PART 1
+// 1. Arrays of Bayern Munich and Borussia Dortmund
+let fcbPlayers1 = [ // Bayern Munich players
+    'Neuer',
+    'Pavard',
+    'Süle',
+    'Upomecano',
+    'Davies',
+    'Kimmich',
+    'Goretzka',
+    'Gnabri',
+    'Coman',
+    'Müller',
+    'Lewandowski',
+];
 
-// Задание 1 //
-// Для диапозона чисел от 0 до 10
+let bvbPlayers2 = [ // Borussia Dortmund players
+    'Kobel',
+    'Can',
+    'Akanji',
+    'Hummels',
+    'Gerreiro',
+    'Dahoud',
+    'Bellingham',
+    'Hazard',
+    'Reyna',
+    'Reus',
+    'Haaland',
+];
 
-// let arr = [];
-/*function getSeriesOfNumbers() {
-    for (let i = 0; arr.length < 9; i++) {
-        const c = i+1;
-        arr.push(c);
-    }
-    return arr;
-}
-getSeriesOfNumbers();
-console.log(arr);*/
+//2. Bayern data
+let gk = fcbPlayers1[0]; // The goalkeeper of Bayern = 'Neuer'
+let fieldPlayers = fcbPlayers1.slice(1,11); // All field players of Bayern
+/*console.log(gk);
+console.log(fieldPlayers);*/
 
-/*function getNum(x, y) {
-    if (x === y-1){
-     return [];
-    }
-    x++;
-    arr.push(x);
-    getNum(x, y);
-    return arr;
+//3. Players of both teams
+const allPlayers = fcbPlayers1.concat(bvbPlayers2);
+// console.log(allPlayers);
+
+//4. Bayern Munich team with substitutions
+let substitutions = ['Hernandez', 'Tolisso', 'Sane'];
+let players1Final = fcbPlayers1.concat(substitutions);
+// console.log(players1Final);
+
+// 5.
+
+const game = {
+    team1: 'Bayern Munich',
+    team2: 'Borussia Dortmund',
+    players: [
+        [
+            'Neuer',
+            'Pavard',
+            'Süle',
+            'Upomecano',
+            'Davies',
+            'Kimmich',
+            'Goretzka',
+            'Gnabri',
+            'Coman',
+            'Müller',
+            'Lewandowski',
+        ],
+        [
+            'Kobel',
+            'Can',
+            'Akanji',
+            'Hummels',
+            'Gerreiro',
+            'Dahoud',
+            'Bellingham',
+            'Hazard',
+            'Reyna',
+            'Reus',
+            'Haaland',
+        ],
+    ],
+    score: '4:0',
+    scored: ['Lewandowski', 'Gnabri', 'Lewandowski', 'Müller'],
+    date: 'Nov 9th, 2019',
+    odds: {
+        team1: 1.33,
+        x: 3.25,
+        team2: 6.5,
+    },
 };
-console.log(getNum(0,10));*/
 
+// initializing variables
+let team1 = game.odds.team1;
+let draw = game.odds.x;
+let team2 = game.odds.team2;
 
-// Задание 2
+/*console.log(`Bayern victory: ${team1}`);
+console.log(`Draw: ${draw}`);
+console.log(`Borussia victory: ${team2}`);*/
 
-/*const febArr = [0,1];
-function getFibonacciNum(febArr){
-    for (let i=2; i<10; i++) {
-        febArr[i] = febArr[i-1] + febArr[i-2];
+//PART 2
+// 1. Add a new events array
+let events = [
+    '17, GOAL!',
+    '36, Substitution',
+    '47, GOAL!',
+    '61, Substitution',
+    '64, Yellow card',
+    '69, Red card',
+    '70, Substitution',
+    '72, Substitution',
+    '76, GOAL!',
+    '80, GOAL!',
+    '92, Yellow card',
+];
+
+// 2. Delete a wrong yellow card at the 64th minute
+events.splice(4,1);
+// console.log(events);
+
+//3.
+const gameEvents = new Map([
+    [17, 'GOAL!'],
+    [36, 'Substitution'],
+    [61, 'Substitution'],
+    [64, 'Yellow card'],
+    [69, 'Red card'],
+    [70, 'Substitution'],
+    [72, 'Substitution'],
+    [76, 'GOAL!'],
+    [80, 'GOAL!'],
+    [92, 'Yellow card'],
+]);
+
+gameEvents.forEach((value, key, map) =>{
+    if (key <= 45) {
+        console.log(['ПЕРВЫЙ ТАЙМ']);
+    }else {
+        console.log(['ВТОРОЙ ТАЙМ']);
     }
-}
-getFibonacciNum(febArr);
-console.log(febArr.slice(0,10));*/
-
-// Задание 3
-
-/*let cleanArr = arr.filter((item, index) => {
-    return arr.indexOf(item) === index;
+    console.log(`${key}: ${value}`);
 });
-console.log(cleanArr);*/
-
-
-// Задание 4
-
-/*let number = 33333333337;
-let array = (""+number).split("").map(Number);
-let sumNum = 0;
-
-for (let i = 0; i < array.length; i++) {
-     sumNum += array[i];
-}
-
-function getNumber(sumNum) {
-     let newArray = (""+sumNum).split("").map(Number);
-     let sum = 0;
-     for (let j = 0; j < newArray.length; j++) {
-          sum += newArray[j];
-     }
-     if (sum > 9) {
-          getNumber(sum);
-     }
-     else {
-          console.log(`Сумма чисел всех итераций <= 9`);
-     }
-}
-getNumber(sumNum);*/
-
-// Задача 5
-
-/*let string = 'var_text_hello'; // var_text_hello --> varTextHello
-let splitted = string.split('');
-
-
-splitted.splice(3,1);
-splitted.splice(7,1);
-splitted.splice(3,1,'T');
-splitted.splice(7,1,'H');
-
-let result = splitted.join('');
-
-console.log(result);*/
-
-// Задача 6
-
-/*let string = '123456'; // '123456' --> '214365'
-console.log(string);
-
-let split = string.split("");
-
-function getNumberLine(split) {
-    const reverseArr = [];
-    for (let i = 0; i < split.length; i++) {
-      reverseArr.push(split[++i],split[i-1]);
-    }
-    return reverseArr.join('');
-}
-console.log(getNumberLine(split));*/
-
-// Задача 7
-
-// Найти пересечение массивов и вернуть их в виде массива
-
-/*
-let arr1 = [1, 2, 3];
-let arr2 = [2, 3, 4, 5];
-
-function getInt(arr1, arr2){
-    let concatArr = arr1.concat(arr2).sort();
-    const doubleItems = [];
-    for (let i=0; i<concatArr.length; i++) {
-        if (concatArr[i+1] === concatArr[i]) {
-            doubleItems.push(concatArr[i]);
-        }
-    }
-    console.log(doubleItems);
-}
-getInt(arr1, arr2);
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
