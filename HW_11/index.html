@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>The Survey</title>
+    <link href="style.css" rel = "stylesheet">
 </head>
 <body>
-$END$
+<div class="myForm">
+    <h1 id="question"></h1>
+    <label id="list"></label>
+    <label id="textInput">
+        <input id="input1" class="input" type='number' min="1" max="4" placeholder="Введите значение">
+    </label>
+    <button id="change" class="btn">Выбрать</button>
+    <button id="result" class="btn-result">Узнать результат</button>
+    <p class="text">Ваш результат:</p>
+</div>
+<script src="js.js" defer></script>
 </body>
 </html>
