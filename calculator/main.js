@@ -37,6 +37,11 @@ buttons.addEventListener('click', (e)=>{
        num1 += key;
        outPut.textContent = num1;
     }
+    // Проверяем нажата ли клавиша операции
+    if(action.includes(key)) {
+        num2 += key;
+        outPut.textContent = num2;
+    }
 });
 
 
