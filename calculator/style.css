@@ -50,12 +50,13 @@ h1 {
 
 
 .result {
-    height: 230px;
+    height: 220px;
     padding: 10px;
     display: grid;
     justify-items: end;
     align-items: end;
-    font-size: 100px;
+    overflow: hidden;
+    font-size: 70px;
     margin-bottom: 20px;
     border: 1px solid #3f4841;
     border-radius: 20px;
