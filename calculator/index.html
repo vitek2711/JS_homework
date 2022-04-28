@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>myCalculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="main.js" defer></script>
 </head>
 <body>
-$END$
+    <div class="discription">
+        <h1 class="title">my calculator</h1>
+        <p class="technologies">created by HTML, CSS, JavaScript</p>
+    </div>
+
+    <div class="calculator">
+        <output class="result" id="result">
+            <p id="outPut">0</p>
+        </output>
+        <div class="buttons">
+            <div class="btn btn-grey" data-num="ac">AC</div>
+            <div class="btn btn-grey" data-num="M+">M+</div>
+            <div class="btn btn-grey" data-num="M-">M-</div>
+            <div class="btn btn-orange" data-num="x">x</div>
+
+            <div class="btn" data-num="7">7</div>
+            <div class="btn" data-num="8">8</div>
+            <div class="btn" data-num="9">9</div>
+            <div class="btn btn-orange" data-num="/">/</div>
+
+            <div class="btn" data-num="4">4</div>
+            <div class="btn" id='one' data-num="5">5</div>
+            <div class="btn" data-num="6">6</div>
+            <div class="btn btn-orange" data-num="+">+</div>
+
+            <div class="btn" data-num="1">1</div>
+            <div class="btn" data-num="2">2</div>
+            <div class="btn" data-num="3">3</div>
+            <div class="btn btn-orange" data-num="-">-</div>
+
+            <div class="btn" data-num=".">.</div>
+            <div class="btn" data-num="0">0</div>
+            <div class="btn" data-num="+/-">+/-</div>
+            <div class="btn btn-green" data-num="=">=</div>
+        </div>
+    </div>
 </body>
 </html>
