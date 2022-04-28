@@ -21,8 +21,6 @@ function clear() {
     outPut.p = 0;
 }
 
-document.querySelector('#ac').onclck = clear;
-
 // Получаем событие по нажатию
 buttons.addEventListener('click', (e)=>{
     let elem = e.target;
