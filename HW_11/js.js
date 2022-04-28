@@ -26,7 +26,7 @@ questionText.insertAdjacentHTML(
 // Варианты для выбора
 
 questionList.innerHTML = '';
-const langList = poll.options;
+langList = poll.options;
 langList.forEach((lang, i)=> {
     questionList.innerHTML += `
     <li class='lang_item'>${i+1}. ${lang}</li>`;
