@@ -35,6 +35,7 @@ buttons.addEventListener('click', (e)=>{
     // Проверяем нажата ли кнопка
     if (numStrArr.includes(key)) {
        num1 += key;
+       outPut.textContent = num1;
     }
 });
 
