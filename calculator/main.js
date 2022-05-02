@@ -1,3 +1,5 @@
+'use strict'
+
 // Variables
 let num1 = '';
 let num2 = '';
@@ -9,12 +11,12 @@ const outPut = document.querySelector('#outPut');
 
 // Arrays
 const numStrArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
-const action  = ['-', '+', 'x', '/'];
+const action  = ['-', '+', 'x', '/', '+/-'];
 
 //Clear function
 function clearOutputField() {
     num1 = '';
-    num2= '';
+    num2 = '';
     operSymbol = '';
     finish = false;
     outPut.textContent = 0;
@@ -60,7 +62,7 @@ buttons.addEventListener('click', (e)=>{
         return;
     }
 
-    // calculations
+       // calculations
     if (key === '=') {
         switch (operSymbol) {
             case "+":
@@ -74,10 +76,12 @@ buttons.addEventListener('click', (e)=>{
             break;
             case "/":
                 if (num2 === '0') {
-                    outPut.textContent = 'Деление на 0';
+                    clearOutputField();
                 }
                 num1 = num1 / num2;
             break;
+            case "+/-":
+                num1 = -num1;
         }
         finish = true;
         outPut.textContent = num1;
