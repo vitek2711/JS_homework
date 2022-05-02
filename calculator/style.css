@@ -15,6 +15,20 @@ body, html {
     background-position: 110% 0;
 }
 
+.title {
+    font-size: 40px;
+    color: #cbc9c8;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.description {
+    font-size: 14px;
+    color: #cbc9c8;
+    text-align: center;
+    margin-top: 10px;
+}
+
 .calculator {
     width: 430px;
     height: 680px;
