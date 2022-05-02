@@ -1,40 +1,27 @@
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body, html {
     font-family: Arial;
     font-weight: 400;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background-color: #3f3d3d;
+    background-color: #000;
     user-select: none;
-}
-h1 {
-    font-size: 70px;
-    color: #fff;
-    text-transform: capitalize;
-}
-
-.technologies {
-    font-size: 20px;
-    color: #bebbbb;
-}
-
-.discription {
-    margin: 0 auto;
-    text-align: center;
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%
 }
 
 .calculator {
     width: 400px;
-    height: 690px;
-    padding: 10px;
+    height: 670px;
     position: absolute;
+    padding: 10px;
     left: 0;
     right: 0;
-    margin: 10px auto;
+    margin: 0 auto;
     top: calc(50% - 250px);
     background: #171616;
     border-radius: 20px;
@@ -44,9 +31,9 @@ h1 {
 }
 
 .calculator:hover {
-    -webkit-box-shadow: 0 2px 5px 3px rgba(4, 255, 0, 0.31);
-    -moz-box-shadow: 0 2px 5px 3px rgba(4, 255, 0, 0.31);
-    box-shadow: 0 2px 5px 3px rgba(4, 255, 0, 0.31);
+    -webkit-box-shadow: 0 5px 25px 3px rgba(4, 255, 0, 0.31);
+    -moz-box-shadow: 0 5px 25px 3px rgba(4, 255, 0, 0.31);
+    box-shadow: 0 5px 25px 3px rgba(4, 255, 0, 0.31);
 }
 
 .result {
@@ -56,7 +43,7 @@ h1 {
     justify-items: end;
     align-items: end;
     overflow: hidden;
-    font-size: 70px;
+    font-size: 100px;
     text-align: left;
     margin-bottom: 20px;
     border: 1px solid #3f4841;
@@ -67,8 +54,10 @@ h1 {
 .label {
     font-weight: 900;
     font-size: 20px;
+    padding: 8px;
     color: #393b3b;
     text-align: center;
+    text-transform: uppercase;
 }
 
 .buttons {
@@ -115,7 +104,7 @@ h1 {
 }
 
 .btn-orange {
-    background: #FF8C00;
+    background: #FF4F00;
 }
 
 .btn-orange:hover{
@@ -128,7 +117,6 @@ h1 {
 
 .btn-green {
     background: #309d45;
-    /*grid-area: equality;*/
 }
 
 .btn-green:hover {
