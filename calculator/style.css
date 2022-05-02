@@ -11,14 +11,15 @@ body, html {
     user-select: none;
     background-image: url(background.jpg);
     background-repeat: no-repeat;
-    background-size: 100%
+    background-size: 80%;
+    background-position: 110% 0;
 }
 
 .calculator {
-    width: 400px;
-    height: 670px;
+    width: 430px;
+    height: 680px;
     position: absolute;
-    padding: 10px;
+    padding: 20px;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -31,9 +32,9 @@ body, html {
 }
 
 .calculator:hover {
-    -webkit-box-shadow: 0 5px 25px 3px rgba(4, 255, 0, 0.31);
-    -moz-box-shadow: 0 5px 25px 3px rgba(4, 255, 0, 0.31);
-    box-shadow: 0 5px 25px 3px rgba(4, 255, 0, 0.31);
+    -webkit-box-shadow: 0 3px 5px 5px rgb(255, 255, 254);
+    -moz-box-shadow: 0 3px 5px 5px rgb(255, 255, 254);
+    box-shadow: 0 3px 5px 5px rgb(255, 255, 254);
 }
 
 .result {
@@ -45,10 +46,13 @@ body, html {
     overflow: hidden;
     font-size: 100px;
     text-align: left;
+    color: #c0bebe;
     margin-bottom: 20px;
     border: 1px solid #3f4841;
     border-radius: 20px;
+    background: #3e6245;
     opacity: 80%;
+    transition: .6s;
 }
 
 .label {
