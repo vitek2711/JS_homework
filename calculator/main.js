@@ -5,32 +5,31 @@ let num1 = '';
 let num2 = '';
 let operSymbol = '';
 let finish = false;
+let addMemory = '';
 const buttons = document.querySelector('.buttons');
 const outPut = document.querySelector('#outPut');
-
+const resultField = document.querySelector('.result');
 
 // Arrays
 const numStrArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
-const action  = ['-', '+', 'x', '/', '+/-'];
+const action  = ['-', '+', 'x', '/', '+ -', 'M+', 'M-'];
 
 //Clear function
 function clearOutputField() {
     num1 = '';
     num2 = '';
-    operSymbol = '';
+    addMemory = '';
     finish = false;
-    outPut.textContent = 0;
+    outPut.textContent = '0';
 }
 
 //Clear
-// document.querySelector('#ac').addEventListener('click', ()=> clearOutputField());
 document.querySelector("#ac").onclick = clearOutputField;
-
 // Click event
 buttons.addEventListener('click', (e)=>{
     let elem = e.target;
     if (!elem.classList.contains('btn')) {
-        elem = elem.parentNode;
+        elem.parentNode;
     }
 
     const key = e.target.textContent;
@@ -54,7 +53,7 @@ buttons.addEventListener('click', (e)=>{
         return;
     }
 
-    // is the button of operations pressed
+    // the button of operations pressed
     if(action.includes(key)) {
         operSymbol = key;
         outPut.textContent = operSymbol;
@@ -62,26 +61,46 @@ buttons.addEventListener('click', (e)=>{
         return;
     }
 
-       // calculations
+    // calculations
     if (key === '=') {
         switch (operSymbol) {
-            case "+":
+            case '+':
                 num1 = (+num1) + (+num2);
             break;
-            case "-":
-                num1 = num1 - num2;
+            case '-':
+                num1 -= num2;
             break;
-            case "x":
-                num1 = num1 * num2;
+            case 'x':
+                num1 *= num2;
             break;
-            case "/":
+            case '/':
                 if (num2 === '0') {
-                    clearOutputField();
+                   outPut.textContent = 'error';
+                   return;
                 }
-                num1 = num1 / num2;
+                num1 /= num2;
             break;
-            case "+/-":
+            case '+ -':
                 num1 = -num1;
+            break;
+
+            // add in memory
+            case 'M+':
+                addMemory = (+num1);
+                resultField.insertAdjacentText('afterbegin', 'M');
+                num1 = '';
+                num2 = '';
+                operSymbol = '';
+                console.log(addMemory);
+            break;
+
+            //get from memory
+            case 'M-':
+               if (addMemory !== '') {
+                    num1 -= addMemory;
+                    addMemory = '';
+               }
+            break;
         }
         finish = true;
         outPut.textContent = num1;
