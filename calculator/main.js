@@ -18,13 +18,14 @@ const action  = ['-', '+', 'x', '/', '+ -', 'M+', 'M-'];
 function clearOutputField() {
     num1 = '';
     num2 = '';
-    addMemory = '';
+    addMemory = 0;
     finish = false;
     outPut.textContent = '0';
 }
 
 //Clear
 document.querySelector("#ac").onclick = clearOutputField;
+
 // Click event
 buttons.addEventListener('click', (e)=>{
     let elem = e.target;
@@ -61,6 +62,46 @@ buttons.addEventListener('click', (e)=>{
         return;
     }
 
+   // add in memory function
+  /*  function addInMemory(){
+        if (key === '=' && operSymbol === 'M+') {
+            if (num1 === '') {
+                addMemory = ''
+            }
+            else if (num1 !== '') {
+                addMemory = (+num1);
+                num1 = '';
+                num2 = '';
+                operSymbol = '';
+                resultField.insertAdjacentText('afterbegin', 'm');
+            }
+            console.log(addMemory);
+        }
+    }
+    addInMemory();*/
+
+    // get from memory function
+    function getFromMemory() {
+        action.includes(key);
+        operSymbol = key;
+        if (addMemory !== '' && operSymbol){
+             num1 = (+num1) - (+addMemory);
+        }
+        else if (addMemory !== '' && operSymbol) {
+              num1 = num1 + addMemory;
+        }
+        else if (addMemory !== '' && operSymbol){
+             num1 = num1 * addMemory;
+        }
+        else if (addMemory !== '' && operSymbol){
+              num1 = num1 / addMemory;
+        }
+        else if (addMemory === '') {
+             console.log('memory is empty');
+        }
+    }
+
+
     // calculations
     if (key === '=') {
         switch (operSymbol) {
@@ -85,9 +126,9 @@ buttons.addEventListener('click', (e)=>{
             break;
 
             // add in memory
-            case 'M+':
+           case 'M+':
                 addMemory = (+num1);
-                resultField.insertAdjacentText('afterbegin', 'M');
+                resultField.insertAdjacentText('afterbegin', 'm');
                 num1 = '';
                 num2 = '';
                 operSymbol = '';
@@ -95,12 +136,25 @@ buttons.addEventListener('click', (e)=>{
             break;
 
             //get from memory
-            case 'M-':
-               if (addMemory !== '') {
-                    num1 -= addMemory;
-                    addMemory = '';
+           case 'M-':
+               getFromMemory();
+               /*if (addMemory !=='' && key === '+') {
+                   num1 = (+num1) + (+addMemory);
                }
-            break;
+               if (addMemory !=='' && key === '-') {
+                   num1 = num1 - addMemory;
+               }
+               if (addMemory !=='' &&  key === '*') {
+                   num1 = num1 * addMemory;
+               }
+               if (addMemory !=='' && action === '/') {
+                   num1 = num1 / addMemory;
+               }
+               else if (addMemory === '') {
+                   console.log('memory is empty');
+                   return num1;
+               }
+            break;*/
         }
         finish = true;
         outPut.textContent = num1;
