@@ -6,161 +6,121 @@ let num2 = '';
 let operSymbol = '';
 let finish = false;
 let addMemory = '';
+let memoryClear = false;
 const buttons = document.querySelector('.buttons');
 const outPut = document.querySelector('#outPut');
-const resultField = document.querySelector('.result');
+document.querySelector('.memory').style.display = 'none';
 
 // Arrays
 const numStrArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
-const action  = ['-', '+', 'x', '/', '+ -', 'M+', 'M-'];
+const action = ['-', '+', 'x', '/', 'M+', 'MR/C'];
 
 //Clear function
 function clearOutputField() {
     num1 = '';
     num2 = '';
-    addMemory = 0;
+    operSymbol = '';
     finish = false;
-    outPut.textContent = '0';
+    showData('0');
+}
+
+// show data
+function showData(data) {
+    if (!num1 && !operSymbol && !num2 && !data) {
+        return;
+    }
+    if (data) {
+        outPut.textContent = data;
+        return;
+    }
+    outPut.textContent = `${num1}${operSymbol}${num2}`;
 }
 
 //Clear
 document.querySelector("#ac").onclick = clearOutputField;
 
 // Click event
-buttons.addEventListener('click', (e)=>{
+buttons.addEventListener('click', (e) => {
+    if (finish) {
+        finish = false;
+        clearOutputField();
+    }
     let elem = e.target;
     if (!elem.classList.contains('btn')) {
-        elem.parentNode;
+        return;
     }
 
-    const key = e.target.textContent;
+    const key = elem.textContent;
 
     // is the button pressed
     if (numStrArr.includes(key)) {
-        if (num2 === '' && operSymbol === ''){
+        if (num2 === '' && operSymbol === '') {
             num1 += key;
-            outPut.textContent = num1;
         }
-        else if (num1 !== '' && num2 !== '' && finish) {
-            num2 = key;
-            finish = false;
-            outPut.textContent = num2;
-        }
+        else if (num1 !=='' && num2 !== '' && finish) {
+             num2 = key;
+             finish = false;
+             outPut.textContent = num2;
+            }
         else {
             num2 += key;
-            outPut.textContent = num2;
+            showData();
         }
         console.log(num1, num2, operSymbol);
-        return;
     }
 
     // the button of operations pressed
-    if(action.includes(key)) {
+    if (action.includes(key)) {
+        if (key === 'MR/C') {
+            if (memoryClear) {
+                addMemory = 0;
+                memoryClear = false;
+                // memory is off
+                document.querySelector('.memory').style.display = 'none';
+            }
+            showData(addMemory);
+            memoryClear = true;
+            return;
+        }
+        if (key === 'M+') {
+            let m = num2 || num1;
+            addMemory += Number(m);
+            memoryClear = false;
+            // memory is enabled
+            document.querySelector('.memory').style.display = 'block';
+            return;
+        }
         operSymbol = key;
-        outPut.textContent = operSymbol;
         console.log(num1, num2, operSymbol);
-        return;
     }
-
-   // add in memory function
-  /*  function addInMemory(){
-        if (key === '=' && operSymbol === 'M+') {
-            if (num1 === '') {
-                addMemory = ''
-            }
-            else if (num1 !== '') {
-                addMemory = (+num1);
-                num1 = '';
-                num2 = '';
-                operSymbol = '';
-                resultField.insertAdjacentText('afterbegin', 'm');
-            }
-            console.log(addMemory);
-        }
-    }
-    addInMemory();*/
-
-    // get from memory function
-    function getFromMemory() {
-        action.includes(key);
-        operSymbol = key;
-        if (addMemory !== '' && operSymbol){
-             num1 = (+num1) - (+addMemory);
-        }
-        else if (addMemory !== '' && operSymbol) {
-              num1 = num1 + addMemory;
-        }
-        else if (addMemory !== '' && operSymbol){
-             num1 = num1 * addMemory;
-        }
-        else if (addMemory !== '' && operSymbol){
-              num1 = num1 / addMemory;
-        }
-        else if (addMemory === '') {
-             console.log('memory is empty');
-        }
-    }
-
 
     // calculations
     if (key === '=') {
+        if (num2 === '') num2 = num1;
         switch (operSymbol) {
             case '+':
                 num1 = (+num1) + (+num2);
-            break;
+                break;
             case '-':
                 num1 -= num2;
-            break;
+                break;
             case 'x':
                 num1 *= num2;
-            break;
+                break;
             case '/':
                 if (num2 === '0') {
-                   outPut.textContent = 'error';
-                   return;
+                    outPut.textContent = 'error';
+                    return;
                 }
                 num1 /= num2;
-            break;
-            case '+ -':
-                num1 = -num1;
-            break;
-
-            // add in memory
-           case 'M+':
-                addMemory = (+num1);
-                resultField.insertAdjacentText('afterbegin', 'm');
-                num1 = '';
-                num2 = '';
-                operSymbol = '';
-                console.log(addMemory);
-            break;
-
-            //get from memory
-           case 'M-':
-               getFromMemory();
-               /*if (addMemory !=='' && key === '+') {
-                   num1 = (+num1) + (+addMemory);
-               }
-               if (addMemory !=='' && key === '-') {
-                   num1 = num1 - addMemory;
-               }
-               if (addMemory !=='' &&  key === '*') {
-                   num1 = num1 * addMemory;
-               }
-               if (addMemory !=='' && action === '/') {
-                   num1 = num1 / addMemory;
-               }
-               else if (addMemory === '') {
-                   console.log('memory is empty');
-                   return num1;
-               }
-            break;*/
-        }
+                break;
+            }
         finish = true;
-        outPut.textContent = num1;
+        showData(num1);
+        memoryClear = false;
         console.log(num1, num2, operSymbol);
+        return;
     }
+    memoryClear = false;
+    showData();
 });
-
-
-
