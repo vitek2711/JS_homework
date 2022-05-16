@@ -1,6 +1,7 @@
 'use strict'
 
 // Variables
+
 let num1 = '';
 let num2 = '';
 let operSymbol = '';
@@ -8,9 +9,50 @@ let finish = false;
 let addMemory = '';
 addMemory = num1 || num2;
 let memoryClear = true;
+let body = document.querySelector('body');
+
+//html code
+let html = `
+    <h1 class="title">My Calculator</h1>
+    <p class="description">Craeted by HTML, CSS, JavaScript</p>
+    <div class="calculator">
+        <output class="result">
+            <span class="memory">M</span>
+            <p id="outPut">0</p>
+        </output>
+        <p class="label">Электроника МК60</p>
+        <div class="buttons">
+            <div class="btn btn-grey" id="ac" data-num="ac">AC</div>
+            <div class="btn btn-grey" data-num="M+">M+</div>
+            <div class="btn btn-grey" data-num="MR/C">MR/C</div>
+            <div class="btn btn-orange" data-num="x">x</div>
+
+            <div class="btn" data-num="7">7</div>
+            <div class="btn" data-num="8">8</div>
+            <div class="btn" data-num="9">9</div>
+            <div class="btn btn-orange" data-num="/">/</div>
+
+            <div class="btn" data-num="4">4</div>
+            <div class="btn" id='one' data-num="5">5</div>
+            <div class="btn" data-num="6">6</div>
+            <div class="btn btn-orange" data-num="+">+</div>
+
+            <div class="btn" data-num="1">1</div>
+            <div class="btn" data-num="2">2</div>
+            <div class="btn" data-num="3">3</div>
+            <div class="btn btn-orange" data-num="-">-</div>
+
+            <div class="btn" data-num=".">.</div>
+            <div class="btn" data-num="0">0</div>
+            <div class="btn btn-green" data-num="=">=</div>
+        </div>
+        <p class="copyright"><span class="ussr">&#9773;</span> Made in USSR</p>
+    </div>
+`;
+body.insertAdjacentHTML('beforeend', html);
+
 const buttons = document.querySelector('.buttons');
 const outPut = document.querySelector('#outPut');
-
 document.querySelector('.memory').style.display = 'none';
 
 // Arrays
