@@ -1,3 +1,44 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body, html {
+    font-weight: 300;
+}
+
 body {
-    background-color: #9c3ec0;
+    background-color: #000;
+    background-size: cover;
+}
+
+.block {
+    background-color: #333;
+    opacity: 55%;
+}
+
+.widget {
+    width: 300px;
+    height: 400px;
+    background-color: #103a64;
+    left: 0;
+    right: 0;
+    top: calc(50% - 200px);
+    margin: 0 auto;
+    position: absolute;
+    opacity: 80%;
+    border-radius: 10px;
+
+}
+
+.bgvideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -9999;
 }
