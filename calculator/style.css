@@ -65,6 +65,7 @@ body, html {
 }
 
 .memory {
+    display: none;
     color: #c0bebe;
     text-align: left;
     font-size: 20px;
@@ -113,6 +114,8 @@ body, html {
 }
 
 .btn:active{
+    width: 90%;
+    height: 90%;
     background: #f5c70c;
 }
 
@@ -125,6 +128,8 @@ body, html {
 }
 
 .btn-grey:active {
+    width: 90%;
+    height: 90%;
     background: #fff;
 }
 
@@ -137,6 +142,8 @@ body, html {
 }
 
 .btn-orange:active {
+    width: 90%;
+    height: 90%;
     background: #67f383;
 }
 
@@ -149,6 +156,8 @@ body, html {
 }
 
 .btn-green:active {
+    width: 90%;
+    height: 90%;
     background: #fa9f31;
 }
 
