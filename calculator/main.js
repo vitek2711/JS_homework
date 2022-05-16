@@ -53,7 +53,7 @@ body.insertAdjacentHTML('beforeend', html);
 
 const buttons = document.querySelector('.buttons');
 const outPut = document.querySelector('#outPut');
-document.querySelector('.memory').style.display = 'none';
+let memory = document.querySelector('.memory');
 
 // Arrays
 const numStrArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
@@ -125,7 +125,7 @@ buttons.addEventListener('click', (e) => {
                 // memory is off
                 addMemory = '';
                 showData(num1);
-                document.querySelector('.memory').style.display = 'none';
+                memory.style.display = 'none';
             }
             showData(addMemory);
             memoryClear = true;
@@ -136,7 +136,7 @@ buttons.addEventListener('click', (e) => {
             addMemory += Number(m);
             memoryClear = false;
             // memory is enabled
-            document.querySelector('.memory').style.display = 'block';
+            memory.style.display = 'block';
             console.log(m);
             return;
         }
@@ -145,7 +145,7 @@ buttons.addEventListener('click', (e) => {
             addMemory = Number(m);
             memoryClear = false;
             // memory is enabled
-            document.querySelector('.memory').style.display = 'block';
+            memory.style.display = 'block';
             console.log(m);
             return;
         }
@@ -153,7 +153,7 @@ buttons.addEventListener('click', (e) => {
             let m = num2 || num1 || addMemory;
             memoryClear = false;
             // memory is enabled
-            document.querySelector('.memory').style.display = 'block';
+            memory.style.display = 'block';
             console.log(m);
             return;
         }
