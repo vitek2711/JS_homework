@@ -5,32 +5,131 @@
 }
 
 body, html {
-    font-weight: 300;
-}
-
-body {
-    background-color: #000;
+    font-family: Arial;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    background-color: #121b2d;
     background-size: cover;
 }
 
-.block {
-    background-color: #333;
-    opacity: 55%;
-}
+/*.load-block {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: calc(50% - 20px);
+}*/
 
 .widget {
+    display: flex;
     width: 300px;
-    height: 400px;
+    height: 450px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     background-color: #103a64;
     left: 0;
     right: 0;
     top: calc(50% - 200px);
     margin: 0 auto;
+    opacity: 85%;
     position: absolute;
-    opacity: 80%;
     border-radius: 10px;
-
+    user-select: none;
+    z-index: 50;
 }
+
+.now {
+    font-size: 16px;
+    letter-spacing: 3px;
+}
+
+.weather-picture {
+    width: 120px;
+    height: 90px;
+}
+
+.weather-description {
+    font-size: 20px;
+    color: #fff;
+}
+
+.forecast {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.descr {
+    font-weight: 600;
+}
+
+.night-img, .daytime-img {
+    width: 40px;
+    height: 40px;
+}
+
+.city-name {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.items {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-part {
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.wind-img, .humidity-img {
+    width: 40px;
+    height: 40px;
+}
+
+.temperature {
+    font-weight: 600;
+    font-size: 75px;
+}
+
+.city-input {
+    width: 200px;
+    height: 30px;
+    margin: 10px;
+    padding: 0 10px;
+    outline: 0 !important;
+    border: none;
+    background-color: #3c638b;
+    border-radius: 10px;
+    user-select: none;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+::placeholder {color: #98bcf1;}
 
 .bgvideo {
     position: fixed;
@@ -40,5 +139,6 @@ body {
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -9999;
+    z-index: -1;
+    opacity: 70%;
 }
