@@ -17,7 +17,7 @@ function renderHtml(forecastObj) {
     let html = `
     <div class="widget">
         <p class="now">The weather is now</p>
-<!--Weather image-->
+        <!--Weather image-->
         <div class="picture">
             <img class="weather-picture" src="./img/cloudy.svg" alt="picture">
         </div>
@@ -26,14 +26,14 @@ function renderHtml(forecastObj) {
         <div class="city-name">${forecastObj?.name}</div>
         <div class="items">
         
-<!--Curent wind speed-->
+            <!--Curent wind speed-->
             <div class="part">
                 <p>Wind</p>
                 <img class="wind-img" src="./img/tornado.svg" alt="wind">
                 <p class="text-part windspeed">${forecastObj?.wind?.speed}m/s</p>
             </div>
             <p class="temperature">${Math.round(forecastObj?.main?.temp-273) +'&deg;'}</p>
-<!-- Current Humidity-->
+            <!-- Current Humidity-->
             <div class="part">
                 <p>Humidity</p>
                 <img class="humidity-img" src="./img/wet.png" alt="humidity-img">
@@ -60,7 +60,7 @@ function renderHtml(forecastObj) {
             </div>
         </div>
         
-<!--input-->
+        <!--input-->
         <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="">
     </div>
     <video autoplay loop muted class="bgvideo">
@@ -71,7 +71,7 @@ function renderHtml(forecastObj) {
        body.insertAdjacentHTML('beforeend', html);
 
     // Get input value
-    document.getElementsByTagName("input").value;
+    let inputValue = document.getElementsByTagName("input").value;
 }
 
 // if (widget) {
@@ -91,7 +91,7 @@ function getCityName(cityName) {
         renderHtml(data);
     });
 }
-getCityName('Норильск');
+getCityName('Мариуполь');
 
 
 /*//Получаем прогноз в массив data
