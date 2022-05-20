@@ -36,7 +36,6 @@ body, html {
     right: 0;
     top: calc(50% - 200px);
     margin: 0 auto;
-    opacity: 85%;
     position: absolute;
     border-radius: 10px;
     user-select: none;
@@ -100,7 +99,6 @@ body, html {
 }
 
 .text-part {
-    padding: 10px 0;
     font-size: 16px;
 }
 
@@ -129,6 +127,26 @@ body, html {
     text-align: center;
 }
 
+.btn {
+    width: 50px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background: #3c638b;
+    color: #98bcf1;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #98bcf1;
+    color: #3f3d3d;
+}
+
+.btn:active {
+    background: #f5c70c;
+    color: #333333;
+}
+
 ::placeholder {color: #98bcf1;}
 
 .bgvideo {
@@ -140,5 +158,5 @@ body, html {
     width: auto;
     height: auto;
     z-index: -1;
-    opacity: 70%;
+    opacity: 40%;
 }
