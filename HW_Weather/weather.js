@@ -1,7 +1,11 @@
 'use strict'
 
 // Variables
+let btn;
+let inputValue;
+let cityName = 'Могилёв';
 let body = document.querySelector('body');
+let widget;
 // async function loadWeather(e) {
 //     weather.innerHTML = `
 //     <div class="load-block">
@@ -61,22 +65,32 @@ function renderHtml(forecastObj) {
         </div>
         
         <!--input-->
-        <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="">
-    </div>
-    <video autoplay loop muted class="bgvideo">
-       <source src="weather.mp4" type="video/mp4">
-    </video>`;
+        <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="" id="inputValue">
+        <button class="btn" id="btn">Get</button>
+    </div>`;
 
     // insert HTML code
-       body.insertAdjacentHTML('beforeend', html);
-
-    // Get input value
-    let inputValue = document.getElementsByTagName("input").value;
+       body.insertAdjacentHTML('afterbegin', html);
+    getCity();
 }
 
-// if (widget) {
-//     loadWeather();
-// }
+console.log(cityName);
+
+function getCity() {
+    btn = document.getElementById('btn');
+    btn.addEventListener('click', ()=> {
+        // Get input value
+        inputValue = document.getElementById('inputValue').value;
+        cityName = inputValue;
+        widget = document.querySelector('.widget');
+        if ( inputValue === '') {
+            return;
+        } else {
+            widget.remove();
+        }
+        getCityName(cityName);
+    });
+}
 
 // Get city name function
 function getCityName(cityName) {
@@ -91,8 +105,14 @@ function getCityName(cityName) {
         renderHtml(data);
     });
 }
-getCityName('Мариуполь');
+getCityName(cityName);
 
+
+
+
+// if (widget) {
+//     loadWeather();
+// }
 
 /*//Получаем прогноз в массив data
 fetch('http://api.openweathermap.org/data/2.5/weather?id=ID_ВАШЕГО_ГОРОДА&lang=ru&appid=ВАШ_API_КЛЮЧ').then(function (resp) {return resp.json() }).then(function (data) {
