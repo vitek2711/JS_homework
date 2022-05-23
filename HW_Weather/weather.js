@@ -2,13 +2,12 @@
 
 // Variables
 let btn;
+let input;
+let error = 'error';
 let inputValue;
 let cityName = 'Могилёв';
 let body = document.querySelector('body');
-/*let weatherIcon = document.querySelector('.weather-icon');*/
-// let weatherIconUrl = `http://openweathermap.org/img/wn/${iconCode}`;
 let widget;
-
 
 //Render HTML function
 function renderHtml(forecastObj) {
@@ -27,14 +26,14 @@ function renderHtml(forecastObj) {
         <div class="items">
             <!--Curent wind speed-->
             <div class="part">
-                <p>Wind</p>
+                <p class="param">Wind</p>
                 <img class="wind-img" src="./img/tornado.svg" alt="wind">
                 <p class="text-part windspeed">${forecastObj?.wind?.speed}m/s</p>
             </div>
             <p class="temperature">${Math.round(forecastObj?.main?.temp-273) +'&deg;'}</p>
             <!-- Current Humidity-->
             <div class="part">
-                <p>Humidity</p>
+                <p class="param">Humidity</p>
                 <img class="humidity-img" src="./img/wet.png" alt="humidity-img">
                 <p class="text-part humidity">${forecastObj?.main?.humidity}%</p>
             </div>
@@ -42,19 +41,19 @@ function renderHtml(forecastObj) {
 <!--Weather forecast-->
  <div class="forecast">
             <div class="forecast-block">
-                <p class="descr">24:00</p>
+                <p class="param">24:00</p>
                 <img class="night-img" src="./img/01d.svg" alt="tonight picture">
-                <p class="forecast-temp">+4</p>
+                <p class="forecast-temp">4</p>
             </div>
             <div class="forecast-block">
-                <p class="descr">12:00</p>
+                <p class="param">12:00</p>
                 <img class="daytime-img" src="./img/02n.svg" alt="daytime picture">
-                <p class="forecast-temp">+13</p>
+                <p class="forecast-temp">13</p>
             </div>
             <div class="forecast-block">
-                <p class="descr">07:00</p>
+                <p class="param">07:00</p>
                 <img class="daytime-img" src="./img/03n.svg" alt="daytime picture">
-                <p class="forecast-temp">+10</p>
+                <p class="forecast-temp">10</p>
             </div>
         </div>
 <!--input-->
@@ -65,19 +64,11 @@ function renderHtml(forecastObj) {
        body.insertAdjacentHTML('afterbegin', html);
 
     getOtherCity();
-    getWeatherIcon();
-}
-
-//get weather icon function
-async function getWeatherIcon() {
-    if (Object.weather === 'light rain') {
-        let lightRain = '<img src="./img/>';
-        weatherIcon.insertAdjacentHTML('afterbegin', lightRain);
-    }
 }
 
 // Get other city function
 function getOtherCity() {
+    input = document.getElementsByTagName('input');
     btn = document.getElementById('btn');
     btn.addEventListener('click', ()=> {
         // Get input value
@@ -112,18 +103,3 @@ getCityName(cityName);
 function getForecast() {
 
 }
-
-/*//Получаем прогноз в массив data
-fetch('http://api.openweathermap.org/data/2.5/weather?id=ID_ВАШЕГО_ГОРОДА&lang=ru&appid=ВАШ_API_КЛЮЧ').then(function (resp) {return resp.json() }).then(function (data) {
-    //добавляем название города
-    document.querySelector('.weather__city').textContent = data.name;
-    //data.main.temp содержит значение в Кельвинах, отнимаем от  273, чтобы получить значение в градусах Цельсия
-    document.querySelector('.weather__forecast').innerHTML = Math.round(data.main.temp - 273) + '&deg;';
-    //Добавляем описание погоды
-    document.querySelector('.weather__desc').textContent = data.weather[0]['description'];
-    //Добавляем иконку погоды
-    document.querySelector('.weather__icon').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0]['icon']}@2x.png">`;
-})
-    .catch(function () {
-        //Обрабатываем ошибки
-    });*/
