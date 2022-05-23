@@ -5,31 +5,26 @@ let btn;
 let inputValue;
 let cityName = 'Могилёв';
 let body = document.querySelector('body');
+/*let weatherIcon = document.querySelector('.weather-icon');*/
+// let weatherIconUrl = `http://openweathermap.org/img/wn/${iconCode}`;
 let widget;
-// async function loadWeather(e) {
-//     weather.innerHTML = `
-//     <div class="load-block">
-//         <img src="./img/data-load.gif" alt="loading...">
-//     </div>`;
-//
-// }
+
 
 //Render HTML function
 function renderHtml(forecastObj) {
-
+    let iconCode = forecastObj?.weather[0]?.icon;
     //html code
     let html = `
     <div class="widget">
         <p class="now">The weather is now</p>
-        <!--Weather image-->
-        <div class="picture">
-            <img class="weather-picture" src="./img/cloudy.svg" alt="picture">
+        <!--Weather picture-->
+        <div class="weather-icon">
+            <img src="./img/${iconCode}.svg" alt="icon">
         </div>
         <!--Weather description-->
         <div class="weather-description">${forecastObj?.weather[0]?.description}</div>
         <div class="city-name">${forecastObj?.name}</div>
         <div class="items">
-        
             <!--Curent wind speed-->
             <div class="part">
                 <p>Wind</p>
@@ -44,8 +39,8 @@ function renderHtml(forecastObj) {
                 <p class="text-part humidity">${forecastObj?.main?.humidity}%</p>
             </div>
         </div>
-        
 <!--Weather forecast-->
+<!--<div class="line"></div>
  <div class="forecast">
             <div class="forecast-block">
                 <p class="descr">24:00</p>
@@ -63,20 +58,28 @@ function renderHtml(forecastObj) {
                 <p class="forecast-temp">+10</p>
             </div>
         </div>
-        
+        <div class="line"></div>-->
         <!--input-->
         <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="" id="inputValue">
         <button class="btn" id="btn">Get</button>
     </div>`;
-
     // insert HTML code
        body.insertAdjacentHTML('afterbegin', html);
-    getCity();
+
+    getOtherCity();
+    getWeatherIcon();
 }
 
-console.log(cityName);
+//get weather icon function
+async function getWeatherIcon() {
+    if (Object.weather === 'light rain') {
+        let lightRain = '<img src="./img/>';
+        weatherIcon.insertAdjacentHTML('afterbegin', lightRain);
+    }
+}
 
-function getCity() {
+// Get other city function
+function getOtherCity() {
     btn = document.getElementById('btn');
     btn.addEventListener('click', ()=> {
         // Get input value
@@ -107,12 +110,10 @@ function getCityName(cityName) {
 }
 getCityName(cityName);
 
+// Get forecast function
+function getForecast() {
 
-
-
-// if (widget) {
-//     loadWeather();
-// }
+}
 
 /*//Получаем прогноз в массив data
 fetch('http://api.openweathermap.org/data/2.5/weather?id=ID_ВАШЕГО_ГОРОДА&lang=ru&appid=ВАШ_API_КЛЮЧ').then(function (resp) {return resp.json() }).then(function (data) {
