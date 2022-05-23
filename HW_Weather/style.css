@@ -60,14 +60,10 @@ body, html {
 .forecast {
     width: 100%;
     display: flex;
+    padding: 7px;
     justify-content: space-between;
-}
-
-.line {
-    width: 100%;
-    height: 1px;
-    background: #98bcf1;
-    margin: 5px 0;
+    border-top: 1px solid #98bcf1;
+    border-bottom: 1px solid #98bcf1;
 }
 
 .forecast-block {
