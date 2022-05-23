@@ -40,26 +40,24 @@ function renderHtml(forecastObj) {
             </div>
         </div>
 <!--Weather forecast-->
-<!--<div class="line"></div>
  <div class="forecast">
             <div class="forecast-block">
                 <p class="descr">24:00</p>
-                <img class="night-img" src="./img/angry_clouds.svg" alt="tonight picture">
+                <img class="night-img" src="./img/01d.svg" alt="tonight picture">
                 <p class="forecast-temp">+4</p>
             </div>
             <div class="forecast-block">
                 <p class="descr">12:00</p>
-                <img class="daytime-img" src="./img/day_rain.svg" alt="daytime picture">
+                <img class="daytime-img" src="./img/02n.svg" alt="daytime picture">
                 <p class="forecast-temp">+13</p>
             </div>
             <div class="forecast-block">
                 <p class="descr">07:00</p>
-                <img class="daytime-img" src="./img/day_clear.svg" alt="daytime picture">
+                <img class="daytime-img" src="./img/03n.svg" alt="daytime picture">
                 <p class="forecast-temp">+10</p>
             </div>
         </div>
-        <div class="line"></div>-->
-        <!--input-->
+<!--input-->
         <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="" id="inputValue">
         <button class="btn" id="btn">Get</button>
     </div>`;
