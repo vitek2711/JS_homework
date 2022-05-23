@@ -9,19 +9,9 @@ body, html {
     color: #fff;
     font-weight: 400;
     font-size: 16px;
-    background-color: #121b2d;
+    background-color: #111c31;
     background-size: cover;
 }
-
-/*.load-block {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    top: calc(50% - 20px);
-}*/
 
 .widget {
     display: flex;
@@ -34,12 +24,15 @@ body, html {
     background-color: #103a64;
     left: 0;
     right: 0;
-    top: calc(50% - 200px);
+    top: calc(50% - 250px);
     margin: 0 auto;
     position: absolute;
     border-radius: 10px;
     user-select: none;
     z-index: 50;
+    -webkit-box-shadow: 1px 15px 100px 31px rgba(251, 255, 0, 0.18);
+    -moz-box-shadow: 1px 15px 100px 31px rgba(251, 255, 0, 0.18);
+    box-shadow: 1px 15px 100px 31px rgba(251, 255, 0, 0.18);
 }
 
 .now {
@@ -57,6 +50,11 @@ body, html {
     color: #fff;
 }
 
+.param {
+    color: #88aadc;
+    font-weight: 600;
+}
+
 .forecast {
     width: 100%;
     display: flex;
@@ -71,10 +69,6 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.descr {
-    font-weight: 600;
 }
 
 .night-img, .daytime-img {
