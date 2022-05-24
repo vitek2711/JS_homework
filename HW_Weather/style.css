@@ -30,6 +30,7 @@ body, html {
     border-radius: 10px;
     user-select: none;
     z-index: 50;
+    transition: .8s;
     -webkit-box-shadow: 1px 15px 100px 31px rgba(251, 255, 0, 0.18);
     -moz-box-shadow: 1px 15px 100px 31px rgba(251, 255, 0, 0.18);
     box-shadow: 1px 15px 100px 31px rgba(251, 255, 0, 0.18);
@@ -58,10 +59,7 @@ body, html {
 .forecast {
     width: 100%;
     display: flex;
-    padding: 7px;
     justify-content: space-between;
-    border-top: 1px solid #98bcf1;
-    border-bottom: 1px solid #98bcf1;
 }
 
 .forecast-block {
@@ -98,6 +96,7 @@ body, html {
 
 .text-part {
     font-size: 16px;
+    padding: 5px;
 }
 
 .wind-img, .humidity-img {
@@ -108,42 +107,60 @@ body, html {
 .temperature {
     font-weight: 600;
     font-size: 70px;
+    text-align: right;
+}
+
+.getcity {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: stretch;
 }
 
 .city-input {
     width: 200px;
-    height: 30px;
-    margin: 10px;
-    padding: 0 10px;
+    height: 40px;
+    margin-top: 5px;
     outline: 0 !important;
     border: none;
     background-color: #3c638b;
     border-radius: 10px;
     user-select: none;
-    font-size: 14px;
+    font-size: 15px;
     color: #fff;
     text-align: center;
 }
 
 .btn {
-    width: 50px;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    background: #3c638b;
-    color: #98bcf1;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #98bcf1;
+    border-radius: 10px;
+    background: #103a64;
     font-size: 16px;
     cursor: pointer;
+    transition: .5ms;
 }
 
-.btn:hover {
-    background: #98bcf1;
-    color: #3f3d3d;
+.btn:hover{
+    border: 1px solid #f5c70c;
 }
 
 .btn:active {
-    background: #f5c70c;
-    color: #333333;
+    color: #103a64;
+    border-radius: 50%;
+    border: 3px solid #98bcf1;
+    transform: scale(0.9);
+}
+
+.fa-solid {
+    font-size: 18px;
+    color: #98bcf1;
+}
+
+.fa-solid:hover{
+    color: #f5c70c;
 }
 
 ::placeholder {color: #98bcf1;}
