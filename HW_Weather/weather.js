@@ -28,22 +28,22 @@ function renderHtml(forecastObj) {
             <div class="part">
                 <p class="param">Wind</p>
                 <img class="wind-img" src="./img/tornado.svg" alt="wind">
-                <p class="text-part windspeed">${forecastObj?.wind?.speed}m/s</p>
+                <p class="text-part">${Math.round(forecastObj?.wind?.speed)} m/s</p>
             </div>
             <p class="temperature">${Math.round(forecastObj?.main?.temp-273) +'&deg;'}</p>
             <!-- Current Humidity-->
             <div class="part">
                 <p class="param">Humidity</p>
                 <img class="humidity-img" src="./img/wet.png" alt="humidity-img">
-                <p class="text-part humidity">${forecastObj?.main?.humidity}%</p>
+                <p class="text-part">${forecastObj?.main?.humidity} %</p>
             </div>
         </div>
 <!--Weather forecast-->
  <div class="forecast">
             <div class="forecast-block">
-                <p class="param">24:00</p>
+                <p class="param">00:00</p>
                 <img class="night-img" src="./img/01d.svg" alt="tonight picture">
-                <p class="forecast-temp">4</p>
+                <p class="forecast-temp">${Math.round(forecastObj?.main.temp-273) +'&deg;'}</p>
             </div>
             <div class="forecast-block">
                 <p class="param">12:00</p>
@@ -51,14 +51,16 @@ function renderHtml(forecastObj) {
                 <p class="forecast-temp">13</p>
             </div>
             <div class="forecast-block">
-                <p class="param">07:00</p>
+                <p class="param">20:00</p>
                 <img class="daytime-img" src="./img/03n.svg" alt="daytime picture">
                 <p class="forecast-temp">10</p>
             </div>
         </div>
 <!--input-->
-        <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="" id="inputValue">
-        <button class="btn" id="btn">Get</button>
+        <div class="getcity">
+            <input placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="" id="inputValue">
+            <button class="btn" id="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>  
     </div>`;
     // insert HTML code
        body.insertAdjacentHTML('afterbegin', html);
@@ -84,7 +86,46 @@ function getOtherCity() {
     });
 }
 
-// Get city name function
+
+
+//Get weather forecast
+function forecast(cityName) {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131`)
+    .then(function(response){
+        return response.json();
+    })
+        .then(function(data){
+            console.log(data);
+        })
+}
+forecast(cityName);
+
+
+
+// Get city name & response function
+function getCityName(cityName) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`)
+        .then(function (response){
+           return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+            renderHtml(data);
+           /* fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131`)
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    console.log(data);
+                })*/
+        })
+}
+getCityName(cityName);
+
+
+
+
+/*
 function getCityName(cityName) {
     // Server request
     const request = new XMLHttpRequest();
@@ -97,9 +138,4 @@ function getCityName(cityName) {
         renderHtml(data);
     });
 }
-getCityName(cityName);
-
-// Get forecast function
-function getForecast() {
-
-}
+getCityName(cityName);*/
