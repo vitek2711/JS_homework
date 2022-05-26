@@ -172,7 +172,7 @@ buttons.addEventListener('click', (e) => {
     if (key === '=') {
         switch (operSymbol) {
             case '+':
-                if (addMemory !== '' && num2 === '' &&) {
+                if (addMemory !== '' && num2 === '') {
                     num1 = Number(num1) + Number(addMemory);
                 }
                 else {
