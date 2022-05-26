@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body, html {
+    font-family: Arial;
+    font-weight: 300;
+    background-color: #000;
+    user-select: none;
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: 110% 0;
+}
+
+.title {
+    font-size: 40px;
+    color: #cbc9c8;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.description {
+    font-size: 14px;
+    color: #cbc9c8;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.calculator {
+    width: 430px;
+    height: 600px;
+    padding: 50px 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: calc(50% - 250px);
+    background: #171616;
+    border: 2px solid #FF4F00;
+    border-radius: 20px;
+    color: #fff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.result {
+    height: 100px;
+    padding: 10px;
+    display: grid;
+    justify-items: end;
+    align-items: end;
+    overflow: hidden;
+    font-family: 'Wallpoet', cursive;
+    font-size: 55px;
+    text-align: left;
+    color: #c0bebe;
+    margin-bottom: 20px;
+    border: 1px solid #3f4841;
+    border-radius: 20px;
+    background: #3e6245;
+    opacity: 80%;
+    transition: .6s;
+}
+
+.memory {
+    display: none;
+    color: #c0bebe;
+    text-align: left;
+    font-size: 20px;
+}
+
+.label {
+    font-weight: 400;
+    font-size: 20px;
+    padding: 10px;
+    color: #6d6e6e;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.buttons {
+    font-family: 'Wallpoet', cursive;
+    display: grid;
+    grid-template-areas:
+    'ac M-plus M-minus multi'
+    'seven eight nine division'
+    'four five six plus'
+    'one two three minus'
+    'point zero equally equally';
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+.btn {
+    width: 80px;
+    height: 50px;
+    background: #333;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 1.5rem;
+    transition: 0.2ms;
+}
+
+.btn.btn-green {
+    grid-area: equally;
+    width: 100%;
+}
+
+.btn:hover {
+    background: #3f3d3d;
+}
+
+.btn:active{
+    width: 90%;
+    height: 90%;
+    background: #f5c70c;
+}
+
+.btn-grey {
+    background: #535453;
+}
+
+.btn-grey:hover {
+    background: #81817f;
+}
+
+.btn-grey:active {
+    width: 90%;
+    height: 90%;
+    background: #fff;
+}
+
+.btn-orange {
+    background: #FF4F00;
+}
+
+.btn-orange:hover{
+    background: #fa9f31;
+}
+
+.btn-orange:active {
+    width: 90%;
+    height: 90%;
+    background: #67f383;
+}
+
+.btn-green {
+    background: #309d45;
+}
+
+.btn-green:hover {
+    background: #4ddc69;
+}
+
+.btn-green:active {
+    width: 90%;
+    height: 90%;
+    background: #fa9f31;
+}
+
+.copyright {
+    padding-top: 10px;
+    font-size: 14px;
+    color: #6d6e6e;
+    text-align: center;
+}
+
+.ussr {
+    font-size: 30px;
+}
