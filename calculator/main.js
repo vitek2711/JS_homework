@@ -90,7 +90,6 @@ buttons.addEventListener('click', (e) => {
     if (!elem.classList.contains('btn')) {
         return;
     }
-
     const key = elem.textContent;
 
     // is the button pressed
@@ -114,7 +113,7 @@ buttons.addEventListener('click', (e) => {
         return;
     }
 
-    // the button of operations pressed
+   // the button of operations pressed
    if (action.includes(key)) {
         operSymbol = key;
         console.log(num1, num2, operSymbol);
@@ -173,7 +172,7 @@ buttons.addEventListener('click', (e) => {
     if (key === '=') {
         switch (operSymbol) {
             case '+':
-                if (addMemory !== '' && num2 === '') {
+                if (addMemory !== '' && num2 === '' &&) {
                     num1 = Number(num1) + Number(addMemory);
                 }
                 else {
