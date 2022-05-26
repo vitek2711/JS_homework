@@ -8,7 +8,7 @@ let operSymbol = '';
 let finish = false;
 let addMemory = '';
 addMemory = num1 || num2;
-let memoryClear = true;
+let memoryClear = false;
 let body = document.querySelector('body');
 
 //html code
@@ -115,17 +115,27 @@ buttons.addEventListener('click', (e) => {
     }
 
     // the button of operations pressed
-    if (action.includes(key)) {
+   if (action.includes(key)) {
         operSymbol = key;
         console.log(num1, num2, operSymbol);
-    }
-    if (memoryAction.includes(key)) {
-        if (key === 'MR/C' && addMemory !== '') {
+   }
+
+   // add to memory and clear memory
+   if (memoryAction.includes(key)) {
+        if (key === 'MR/C'  && addMemory !== '') {
             if (memoryClear) {
                 // memory is off
-                addMemory = '';
-                showData(num1);
+                addMemory = 0;
+                memoryClear = false;
                 memory.style.display = 'none';
+            }
+            if(!num1){
+                num1=addMemory;
+            }
+            else if(addMemory!== 0){
+                num2=addMemory;
+                showData();
+                return;
             }
             showData(addMemory);
             memoryClear = true;
@@ -157,7 +167,7 @@ buttons.addEventListener('click', (e) => {
             console.log(m);
             return;
         }
-    }
+   }
 
     // calculations
     if (key === '=') {
@@ -165,7 +175,6 @@ buttons.addEventListener('click', (e) => {
             case '+':
                 if (addMemory !== '' && num2 === '') {
                     num1 = Number(num1) + Number(addMemory);
-                    showData();
                 }
                 else {
                     num1 = Number(num1) + Number(num2);
@@ -203,6 +212,7 @@ buttons.addEventListener('click', (e) => {
         finish = true;
         showData(num1);
         num2 = '';
+        operSymbol = '';
         memoryClear = false;
         console.log(num1, num2, operSymbol, addMemory);
         return;
