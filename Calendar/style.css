@@ -33,8 +33,12 @@ h2 {
 }
 
 .calendar {
-    width: 400px;
-    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 420px;
+    height: 420px;
     padding: 10px;
     border: solid 1px #4ddc69;
     border-radius: 10px;
@@ -44,4 +48,46 @@ h2 {
     right: 0;
     top: calc(50% - 140px);
     position: absolute;
+}
+
+.info-block {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 5px;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #d99f55;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.fa-solid {
+    font-size: 28px;
+    color: #ade017;
+}
+
+.info {
+    font-family: Caveat Brush;
+    font-size: 26px;
+    text-transform: uppercase;
+    background-image: linear-gradient(132deg, #F4D03F 0%, #963491 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent;
+}
+
+.cell-block {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.cell {
+    width: calc(100% / 7);
+    height: 50px;
+    border: 1px solid #7c9413;
+    border-radius: 5px;
 }
