@@ -12,6 +12,7 @@ body, html {
     background-color: #232020;
 }
 
+/* title */
 h1 {
     font-weight: 300;
     font-size: 90px;
@@ -30,13 +31,46 @@ h2 {
     -webkit-text-fill-color:transparent;
 }
 
-.calendar {
+/* weather */
+.fa-umbrella {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    right: -300px;
+    cursor: pointer;
+    color: #a62cb9;
+    font-size: 38px;
+}
+
+.fa-umbrella:active {
+
+}
+
+.weather {
     display: flex;
+    width: 500px;
+    height: 500px;
+    border: 1px solid #d99f55;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    left: 0;
+    right: 0;
+    position: absolute;
+    top: calc(50% - 140px);
+}
+
+/* calender */
+.calendar-wrapper {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    background: #232020;
     flex-direction: column;
     align-items: center;
     justify-items: center;
-    width: 500px;
-    height: 500px;
     padding: 15px;
     border: 2px solid #4ddc69;
     border-radius: 10px;
@@ -46,6 +80,7 @@ h2 {
     right: 0;
     top: calc(50% - 140px);
     position: absolute;
+    z-index: 20;
 }
 
 .info-block {
@@ -59,14 +94,25 @@ h2 {
     margin: 10px 0;
 }
 
-.fa-solid {
+.fa-arrow-right {
     font-size: 28px;
-    color: #ade017;
     cursor: pointer;
+    color: #a62cb9;
+}
+
+.fa-arrow-left {
+    font-size: 28px;
+    cursor: pointer;
+    color: #d99f55;
+}
+
+.fa-solid:hover {
+    font-size: 34px;
+    color: #ade017;
 }
 
 .fa-solid:active {
-    font-size: 22px;
+    font-size: 28px;
     color: #fff;
 }
 
@@ -111,3 +157,5 @@ h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color:transparent;
 }
+
+/* weather */
