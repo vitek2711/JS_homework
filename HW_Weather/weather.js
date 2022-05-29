@@ -7,7 +7,6 @@ let error = 'error';
 let inputValue;
 let cityName = 'Могилёв';
 let body = document.querySelector('body');
-// let forecast = document.querySelector('.forecast');
 let widget;
 let iconCode;
 let humidity;
@@ -17,7 +16,7 @@ let currentCityName;
 let windSpeed;
 
 //Render HTML function
-function renderHtml(forecastObj, forecastList) {
+function renderHtml(forecastObj, fDataList) {
     iconCode = forecastObj?.weather[0]?.icon;
     humidity = forecastObj?.main?.humidity;
     currentTemperature = Math.round(forecastObj?.main.temp - 273);
@@ -56,19 +55,19 @@ function renderHtml(forecastObj, forecastList) {
         <p class="now">forecast for three days</p>
  <div class="forecast">
             <div class="forecast-block">
-                <p class="param">day</p>
-                <img class="night-img" src="./img/01d.svg" alt="tonight picture">
-                <p class="forecast-temp"></p>
+                <p class="param">${fDataList[0].dt_txt.split(' ')[0].slice(8,10)}</p>
+                <img class="night-img" src="./img/${fDataList[0].weather[0].icon}.svg" alt="icon">
+                <p class="forecast-temp">${fDataList[0].main.temp.toFixed(0)}&deg;</p>
             </div>
             <div class="forecast-block">
-                <p class="param">day</p>
-                <img class="daytime-img" src="./img/02n.svg" alt="daytime picture">
-                <p class="forecast-temp">deg</p>
+                <p class="param">${fDataList[1].dt_txt.split(' ')[0].slice(8,10)}</p>
+                <img class="daytime-img" src="./img/${fDataList[1].weather[0].icon}.svg" alt="icon">
+                <p class="forecast-temp">${fDataList[1].main.temp.toFixed(0)}&deg;</p>
             </div>
             <div class="forecast-block">
-                <p class="param">day</p>
-                <img class="daytime-img" src="./img/03n.svg" alt="daytime picture">
-                <p class="forecast-temp">deg</p>
+                <p class="param">${fDataList[2].dt_txt.split(' ')[0].slice(8,10)}</p>
+                <img class="daytime-img" src="./img/${fDataList[2].weather[0].icon}.svg" alt="icon">
+                <p class="forecast-temp">${fDataList[2].main.temp.toFixed(0)}&deg;</p>
             </div>
         </div>
         <!--input-->
@@ -97,66 +96,44 @@ function getOtherCity() {
         } else {
             widget.remove();
         }
-        getCityName(cityName);
-        getForecast(cityName);
+        (async function (){
+            getCityName(cityName);
+        })();
     });
 }
 
+//Get weather forecast
+async function forecast(cityName) {
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=25&appid=6a7a4d30f99d918e2254ddc1a283a131&units=metric`)
+    let fData = await response.json();
+    let date = 8;
+    fData.list = fData.list.filter((item, index) => {
+        if (index > date) date += 8;
+        return index!==0 && index % date === 0;
+    });
+    return fData.list;
+}
+
+// forecast(cityName);
+
 
 // Get city name & response function
-function getCityName(cityName) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            renderHtml(data);
-        })
+async function getCityName(cityName) {
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`)
+    let mainCityData = await response.json();
+    let forecastData = await forecast(cityName);
+    console.log(mainCityData);
+    renderHtml(mainCityData, forecastData);
 }
-getCityName(cityName);
 
-
-//Get weather forecast
-function getForecast(cityName) {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=25&appid=6a7a4d30f99d918e2254ddc1a283a131`)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            let date = 8;
-            data.list = data.list.filter((item, index) => {
-                if (index > date) date += 8;
-                return index!==0 && index % date === 0;
-            });
-            let dates = data.list.map((item,index) => item.dt_txt.split(' ')[0]);
-            // renderForecast(data);
-            console.log(data.list,'---------');
-            // console.log(dates);
-            renderHtml(data.list);
-        })
+function nextDaysWeather(data) {
+    let forecasts = document.querySelectorAll('.forecast-block');
+    forecasts.forEach(item=>{
+        let fParam = item.querySelector('.param');
+        let fImg = item.querySelector('.daytime-img');
+        let fTemp = item.querySelector('.forecast-temp');
+    })
 }
-getForecast(cityName);
-
-/*// Render weather list
-function renderForecast(forecastList){
-    let forecastHtml = `
-    <!--Weather forecast-->
-                <div class="forecast-block">
-                    <p class="param">00:00</p>
-                    <img class="night-img" src="./img/01d.svg" alt="tonight picture">
-                    <p class="forecast-temp">${Math.round( forecastList)}</p>
-                </div>
-                <div class="forecast-block">
-                    <p class="param">12:00</p>
-                    <img class="daytime-img" src="./img/02n.svg" alt="daytime picture">
-                    <p class="forecast-temp">13</p>
-                </div>
-                <div class="forecast-block">
-                    <p class="param">20:00</p>
-                    <img class="daytime-img" src="./img/03n.svg" alt="daytime picture">
-                    <p class="forecast-temp">10</p>
-                </div>
-   `
-    body.insertAdjacentHTML('beforebegin', forecastHtml);
-}*/
+(async function (){
+    getCityName(cityName);
+})();
