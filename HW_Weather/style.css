@@ -9,7 +9,7 @@ body, html {
     color: #fff;
     font-weight: 400;
     font-size: 16px;
-    background-color: #111c31;
+    background-color: #2d2b2b;
     background-size: cover;
 }
 
@@ -100,8 +100,8 @@ body, html {
 }
 
 .wind-img, .humidity-img {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
 }
 
 .temperature {
@@ -130,6 +130,10 @@ body, html {
     font-size: 15px;
     color: #fff;
     text-align: center;
+}
+
+.city-input:hover {
+    border: 1px solid #f5c70c;
 }
 
 .btn {
