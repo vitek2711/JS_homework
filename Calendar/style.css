@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body, html {
+    font-family: Arial;
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    background-color: #2d2b2b;
+}
+
+h1 {
+    font-family: Caveat Brush;
+    font-weight: 300;
+    font-size: 90px;
+    text-align: center;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+h2 {
+    font-family: Caveat Brush;
+    font-weight: 300;
+    font-size: 40px;
+    text-transform: lowercase;
+    text-align: center;
+    background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color:transparent;
+}
+
+.calendar {
+    width: 400px;
+    height: 400px;
+    padding: 10px;
+    border: solid 1px #4ddc69;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: calc(50% - 140px);
+    position: absolute;
+}
