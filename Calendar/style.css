@@ -107,12 +107,11 @@ h2 {
 }
 
 .fa-solid:hover {
-    font-size: 34px;
     color: #ade017;
 }
 
 .fa-solid:active {
-    font-size: 28px;
+    font-size: 20px;
     color: #fff;
 }
 
@@ -139,11 +138,11 @@ h2 {
     height: 50px;
     border: 1px solid #7c9413;
     border-radius: 5px;
-    font-size: 30px;
+    font-size: 38px;
     color: #bbb8b8;
 }
 
-.day {
+.dayname {
     text-transform: uppercase;
     text-align: center;
     font-size: 30px;
