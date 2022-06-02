@@ -9,13 +9,11 @@ const option = {
     year: 'numeric',
 }
 
-//get current date
+//get full current date
 let currentDateInfo = new Date();
 console.log(currentDateInfo);
-let currentDate = currentDateInfo.getDate();
-console.log(currentDate)
 
-// get current date info
+// get current date info for calendar (month & year)
 let dateInfo = currentDateInfo.toLocaleString('en-EN',option);
 console.log(dateInfo);
 
