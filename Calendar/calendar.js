@@ -9,12 +9,17 @@ const option = {
     year: 'numeric',
 }
 
-//get full current date
+//get current date
 let currentDateInfo = new Date();
-console.log(currentDateInfo);
 
-// get current date info for calendar (month & year)
-let dateInfo = currentDateInfo.toLocaleString('en-EN',option);
+/*
+if(currentDateInfo.getMonth()===(new Date()).getMonth() && currentDateInfo.getFullYear()===(new Date()).getFullYear()){
+
+}
+*/
+
+// get current date info
+let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
 console.log(dateInfo);
 
 //render HTML-function
@@ -33,10 +38,10 @@ function renderHml() {
     <!-- start calendar section -->
     <div class="calendar-wrapper">
         <div class="info-block">
-            <i class="fa-solid fa-arrow-left"></i>
+            <i id="arrowLeft" class="fa-solid fa-arrow-left"></i>
                  <!-- month & year -->
                  <p class="info">${dateInfo}</p>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i id="arrowRight" class="fa-solid fa-arrow-right"></i>
         </div>
         <div class="cell-block">
             <!-- days names-->
@@ -99,29 +104,63 @@ function renderHml() {
     </div>
 `
     body.insertAdjacentHTML('afterbegin', html);
+    addArrowHandlers();
 }
+
 renderHml();
+getDateOfCalendar();
 
-let startDate = getDate(currentDateInfo);
 
+/// get dates in cells
+function getDateOfCalendar() {
+    const tempDate = new Date(currentDateInfo);
+    let startDate = getDate(tempDate);
 //get date numbers
-let cells = document.querySelectorAll('.day');
-cells.forEach(cell=>{
-    cell.innerText=startDate.getDate();
-    startDate.setDate(currentDateInfo.getDate()+1);
-});
+    let cells = document.querySelectorAll('.day');
+    cells.forEach(cell => {
+        cell.innerText = startDate.getDate();
+        startDate.setDate(tempDate.getDate() + 1);
+    });
 
+}
 
-function getDate(myDate){
+// get date
+function getDate(myDate) {
     let day = myDate.getDay();
-    myDate.setDate(myDate.getDate()-day);
+    if(myDate.getDay()===0){
+        myDate.setDate(myDate.getDate() - 6);
+        return myDate;
+    }
+    myDate.setDate(myDate.getDate() - day + 1);
     return myDate;
 }
 
-//get current day
+// arrow handlers
+function addArrowHandlers() {
+    const arrowLeft = document.getElementById('arrowLeft');
+    const arrowRight = document.getElementById('arrowRight');
+    arrowLeft.addEventListener('click', (e) => {
+        changeMonth(-1);
+    })
+    arrowRight.addEventListener('click', (e) => {
+        changeMonth(1);
+    })
+}
 
+// change month
+function changeMonth(month = 0) {
+    currentDateInfo.setMonth(currentDateInfo.getMonth() + month);
+    getDateOfCalendar();
+}
 
-
+//get other month
+function getOtherMonth(dateInfo) {
+    if (changeMonth(-1)) {
+        return dateInfo - 1;
+    }
+    addArrowHandlers();
+}
+getOtherMonth(dateInfo)
 
 
 
