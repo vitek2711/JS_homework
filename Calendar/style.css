@@ -95,13 +95,13 @@ h2 {
 }
 
 .fa-arrow-right {
-    font-size: 28px;
+    font-size: 40px;
     cursor: pointer;
     color: #a62cb9;
 }
 
 .fa-arrow-left {
-    font-size: 28px;
+    font-size: 40px;
     cursor: pointer;
     color: #d99f55;
 }
@@ -111,7 +111,7 @@ h2 {
 }
 
 .fa-solid:active {
-    font-size: 20px;
+    transform: scale(0.5);
     color: #fff;
 }
 
