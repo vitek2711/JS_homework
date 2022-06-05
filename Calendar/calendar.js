@@ -32,7 +32,7 @@ const monthArr = [
     'december'
 ];
 
-const daysArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+const daysArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 // get current date info
 let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
@@ -53,10 +53,14 @@ function renderHml() {
     <!-- start calendar section -->
     <div class="calendar-wrapper">
         <div class="info-block">
-            <i id="arrowLeft" class="fa-solid fa-arrow-left"></i>
+            <div id="arrowLeft" >
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
                  <!-- month & year -->
                  <p id='info' class="info"></p>
-            <i id="arrowRight" class="fa-solid fa-arrow-right"></i>
+            <div id="arrowRight">
+                <i  class="fa-solid fa-arrow-right"></i>
+            </div>
         </div>
         <div class="cell-block">
             <!-- days names-->
@@ -125,13 +129,34 @@ function renderHml() {
 renderHml();
 getDateOfCalendar();
 
+function removeTempClasses() {
+    let cDay = document.querySelector('.current-day');
+    if (cDay) {
+        cDay.classList.remove('current-day');
+    }
+    let allmonthcells = document.querySelectorAll('.allmonthcell');
+    allmonthcells.forEach(item=>item.classList.remove('allmonthcell'));
+    
+}
+
 /// get dates in cells
 function getDateOfCalendar() {
     const tempDate = new Date(currentDateInfo);
+    tempDate.setDate(1);
+    let monthNow = tempDate.getMonth();
     let startDate = getDate(tempDate);
 //get date numbers
     let cells = document.querySelectorAll('.day');
     cells.forEach(cell => {
+        if (startDate.getMonth() === (new Date()).getMonth() && startDate.getFullYear() === (new Date()).getFullYear()) {
+            if (startDate.getDate() === (new Date()).getDate()) {
+                cell.classList.add('current-day');
+            }
+        }
+        if(monthNow===startDate.getMonth()){
+            cell.classList.add('allmonthcell');
+        }
+        cell.dataset.date = `${startDate.getDate()}-${startDate.getMonth()+1}-${startDate.getFullYear()}}`
         cell.innerText = startDate.getDate();
         startDate.setDate(tempDate.getDate() + 1);
     });
@@ -141,7 +166,7 @@ function getDateOfCalendar() {
 // get date
 function getDate(myDate) {
     let day = myDate.getDay();
-    if(myDate.getDay()===0){
+    if (myDate.getDay() === 0) {
         myDate.setDate(myDate.getDate() - 6);
         return myDate;
     }
@@ -154,12 +179,14 @@ function addArrowHandlers() {
     const arrowLeft = document.getElementById('arrowLeft');
     const arrowRight = document.getElementById('arrowRight');
     arrowLeft.addEventListener('click', (e) => {
+        removeTempClasses();
         changeMonth(-1);
         if (currentMonth < 0) {
             currentYear -= 1;
         }
     })
     arrowRight.addEventListener('click', (e) => {
+        removeTempClasses();
         changeMonth(1);
         if (currentMonth > 11) {
             currentYear += 1;
@@ -181,6 +208,7 @@ let info = document.getElementById('info');
 function switchMonthAndYear() {
     info.innerText = `${currentDateInfo.toLocaleString('en-EN', option)}`;
 }
+
 switchMonthAndYear();
 
 //clear info field
@@ -189,18 +217,26 @@ function clearInfo() {
 }
 
 //current date cell
-let dayCell = document.querySelector('.day');
 
-function currentDateCell(){
-    if (currentDate === dayCell.innerText) {
-        dayCell.style.border = "4px solid #F4D03FFF";
-        dayCell.style.color = "#F4D03FFF";
 
+/*function currentDateCell() {
+    let curDay = document.querySelector('.current-day');
+    if(curDay){
+        curDay.classList.add('currentday');
     }
-    dayCell.style.border = "4px solid #F4D03FFF";
-    dayCell.style.color = "#F4D03FFF";
-}
-currentDateCell();
+    let dayCell = document.querySelectorAll('.day');
+    let date = new Date();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+/!*    if (month === currentMonth && year === currentYear) {
+        dayCell.classList.add('currentday');
+    } else {
+        dayCell.classList.remove('currentday');
+    }*!/
+
+}*/
+
+// currentDateCell();
 
 /*let dayCell = document.querySelector('.day');
 function currentDateColor() {
@@ -210,7 +246,7 @@ function currentDateColor() {
 }
 currentDateColor()*/
 
-console.log(dayCell)
+// console.log(dayCell)
 console.log(currentDate)
 
 
