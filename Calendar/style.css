@@ -44,10 +44,6 @@ h2 {
     font-size: 38px;
 }
 
-.fa-umbrella:active {
-
-}
-
 .weather {
     display: flex;
     width: 500px;
@@ -156,5 +152,16 @@ h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color:transparent;
 }
+
+/* class for cells of current month */
+.allmonthcell {
+    border: 4px solid #F4D03FFF;
+}
+
+/* current day */
+.currentday {
+    background-color: #1e3823;
+}
+
 
 /* weather */
