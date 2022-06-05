@@ -12,11 +12,27 @@ const option = {
 //get current date
 let currentDateInfo = new Date();
 
-/*
-if(currentDateInfo.getMonth()===(new Date()).getMonth() && currentDateInfo.getFullYear()===(new Date()).getFullYear()){
+let currentDate = currentDateInfo.getDate();
+let currentDay = currentDateInfo.getDay();
+let currentMonth = currentDateInfo.getMonth();
+let currentYear = currentDateInfo.getFullYear();
 
-}
-*/
+const monthArr = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'mai',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december'
+];
+
+const daysArr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 
 // get current date info
 let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
@@ -25,7 +41,6 @@ console.log(dateInfo);
 //render HTML-function
 function renderHml() {
     document.querySelector('.info-block');
-
     //HTML-code
     let html = `
      <!-- title -->
@@ -40,7 +55,7 @@ function renderHml() {
         <div class="info-block">
             <i id="arrowLeft" class="fa-solid fa-arrow-left"></i>
                  <!-- month & year -->
-                 <p class="info">${dateInfo}</p>
+                 <p id='info' class="info"></p>
             <i id="arrowRight" class="fa-solid fa-arrow-right"></i>
         </div>
         <div class="cell-block">
@@ -110,7 +125,6 @@ function renderHml() {
 renderHml();
 getDateOfCalendar();
 
-
 /// get dates in cells
 function getDateOfCalendar() {
     const tempDate = new Date(currentDateInfo);
@@ -141,26 +155,64 @@ function addArrowHandlers() {
     const arrowRight = document.getElementById('arrowRight');
     arrowLeft.addEventListener('click', (e) => {
         changeMonth(-1);
+        if (currentMonth < 0) {
+            currentYear -= 1;
+        }
     })
     arrowRight.addEventListener('click', (e) => {
         changeMonth(1);
+        if (currentMonth > 11) {
+            currentYear += 1;
+        }
     })
 }
 
 // change month
 function changeMonth(month = 0) {
-    currentDateInfo.setMonth(currentDateInfo.getMonth() + month);
+    currentMonth = currentDateInfo.setMonth(currentDateInfo.getMonth() + month);
     getDateOfCalendar();
+    clearInfo();
+    switchMonthAndYear();
 }
 
-//get other month
-function getOtherMonth(dateInfo) {
-    if (changeMonth(-1)) {
-        return dateInfo - 1;
-    }
-    addArrowHandlers();
+let info = document.getElementById('info');
+
+//switch month and year
+function switchMonthAndYear() {
+    info.innerText = `${currentDateInfo.toLocaleString('en-EN', option)}`;
 }
-getOtherMonth(dateInfo)
+switchMonthAndYear();
+
+//clear info field
+function clearInfo() {
+    info.innerText = '';
+}
+
+//current date cell
+let dayCell = document.querySelector('.day');
+
+function currentDateCell(){
+    if (currentDate === dayCell.innerText) {
+        dayCell.style.border = "4px solid #F4D03FFF";
+        dayCell.style.color = "#F4D03FFF";
+
+    }
+    dayCell.style.border = "4px solid #F4D03FFF";
+    dayCell.style.color = "#F4D03FFF";
+}
+currentDateCell();
+
+/*let dayCell = document.querySelector('.day');
+function currentDateColor() {
+    if (dayCell.innerText === currentDay) {
+        dayCell.classList.add('currentday');
+    }
+}
+currentDateColor()*/
+
+console.log(dayCell)
+console.log(currentDate)
+
 
 
 
