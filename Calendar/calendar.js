@@ -1,5 +1,5 @@
 'use strict'
-//variables
+/// variables ///
 let body = document.querySelector('body');
 
 // option params
@@ -11,41 +11,21 @@ const option = {
 
 //get current date
 let currentDateInfo = new Date();
-
-let currentDate = currentDateInfo.getDate();
-let currentDay = currentDateInfo.getDay();
 let currentMonth = currentDateInfo.getMonth();
 let currentYear = currentDateInfo.getFullYear();
-
-const monthArr = [
-    'january',
-    'february',
-    'march',
-    'april',
-    'mai',
-    'june',
-    'july',
-    'august',
-    'september',
-    'october',
-    'november',
-    'december'
-];
-
-const daysArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 // get current date info
 let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
 console.log(dateInfo);
 
-//render HTML-function
+//render HTML function
 function renderHml() {
     document.querySelector('.info-block');
     //HTML-code
     let html = `
      <!-- title -->
-    <h1>Colourful Calendar</h1>
-    <h2>This calendar created by HTML, CSS, JavaScript</h2>
+    <h1>Colourful Calendar & Weather Forecast</h1>
+    <h2>This calendar and weather forecast created by HTML, CSS, JavaScript</h2>
     <!-- start weather section -->
     <div class="weather">
         <i class="fa-solid fa-umbrella"></i>
@@ -129,6 +109,8 @@ function renderHml() {
 renderHml();
 getDateOfCalendar();
 
+
+// remove temporary classes
 function removeTempClasses() {
     let cDay = document.querySelector('.current-day');
     if (cDay) {
@@ -145,7 +127,7 @@ function getDateOfCalendar() {
     tempDate.setDate(1);
     let monthNow = tempDate.getMonth();
     let startDate = getDate(tempDate);
-//get date numbers
+    //get date numbers
     let cells = document.querySelectorAll('.day');
     cells.forEach(cell => {
         if (startDate.getMonth() === (new Date()).getMonth() && startDate.getFullYear() === (new Date()).getFullYear()) {
@@ -208,7 +190,6 @@ let info = document.getElementById('info');
 function switchMonthAndYear() {
     info.innerText = `${currentDateInfo.toLocaleString('en-EN', option)}`;
 }
-
 switchMonthAndYear();
 
 //clear info field
@@ -216,38 +197,7 @@ function clearInfo() {
     info.innerText = '';
 }
 
-//current date cell
 
-
-/*function currentDateCell() {
-    let curDay = document.querySelector('.current-day');
-    if(curDay){
-        curDay.classList.add('currentday');
-    }
-    let dayCell = document.querySelectorAll('.day');
-    let date = new Date();
-    let month = date.getMonth();
-    let year = date.getFullYear();
-/!*    if (month === currentMonth && year === currentYear) {
-        dayCell.classList.add('currentday');
-    } else {
-        dayCell.classList.remove('currentday');
-    }*!/
-
-}*/
-
-// currentDateCell();
-
-/*let dayCell = document.querySelector('.day');
-function currentDateColor() {
-    if (dayCell.innerText === currentDay) {
-        dayCell.classList.add('currentday');
-    }
-}
-currentDateColor()*/
-
-// console.log(dayCell)
-console.log(currentDate)
 
 
 
