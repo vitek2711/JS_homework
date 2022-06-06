@@ -1,4 +1,6 @@
 'use strict'
+// CALENDAR SECTION //
+
 /// variables ///
 let body = document.querySelector('body');
 
@@ -26,10 +28,6 @@ function renderHml() {
      <!-- title -->
     <h1>Colourful Calendar & Weather Forecast</h1>
     <h2>This calendar and weather forecast created by HTML, CSS, JavaScript</h2>
-    <!-- start weather section -->
-    <div class="weather">
-        <i class="fa-solid fa-umbrella"></i>
-    </div>
     <!-- start calendar section -->
     <div class="calendar-wrapper">
         <div class="info-block">
@@ -101,6 +99,41 @@ function renderHml() {
             <div class="cell day weekend"></div>
         </div>
     </div>
+    <!-- start weather section -->
+    <div class="weather-wrapper">
+        <i id="umbrella" class="fa-solid fa-umbrella"></i>
+        <div class="close">CLOSE</div>
+        <p class="now">The weather is now</p>
+        <div class="weather">
+            <!--Weather picture-->
+            <div class="weather-icon">
+                <img src="./img/03n.svg" alt="icon">
+            </div>
+            <!--Weather description-->
+                <div class="weather-description">Rain</div>
+                <div class="city-name">Могилёв</div>
+            <div class="items">
+                <!--Current wind speed-->
+                <div class="part">
+                    <p class="param">Wind</p>
+                    <img class="wind-img" src="./img/tornado.svg" alt="wind">
+                    <p class="text-part"> 12 m/s</p>
+                </div>
+                <p class="temperature">12&deg;</p>
+                <!-- Current Humidity-->
+                <div class="part">
+                    <p class="param">Humidity</p>
+                    <img class="humidity-img" src="./img/wet.png" alt="humidity-img">
+                    <p class="text-part">60 &#37;</p>
+                </div>
+            </div>
+            <!--get city input-->
+            <div class="getcity">
+                <input form="btn" placeholder="Enter the name of the city" class="city-input" type="text" size="30" value="" id="inputValue">
+                <button id="btn" class="btn" id="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>  
+        </div>  
+    </div>
 `
     body.insertAdjacentHTML('afterbegin', html);
     addArrowHandlers();
@@ -142,7 +175,6 @@ function getDateOfCalendar() {
         cell.innerText = startDate.getDate();
         startDate.setDate(tempDate.getDate() + 1);
     });
-
 }
 
 // get date
@@ -197,7 +229,35 @@ function clearInfo() {
     info.innerText = '';
 }
 
+// WEATHER SECTION //
 
+// view the forecast of current day on click
+function vievForecastblock() {
+    document.querySelector('#umbrella').addEventListener('click', () => {
+        document.querySelector('.weather-wrapper').classList.add('active');
+        document.querySelector('#umbrella').style.display = 'none';
+        document.querySelector('.weather-wrapper').classList.add('.close');
+        document.querySelector('.close').style.display = 'block';
+    })
+    document.querySelector('.close').addEventListener('click', ()=>{
+        document.querySelector('.weather-wrapper').classList.add('passive');
+        document.querySelector('.close').style.display = 'none';
+        document.querySelector('.fa-umbrella').style.display = 'block';
+    })
+}
+vievForecastblock();
+
+/*
+// close the forecast of current day on click
+function closeForecastblock() {
+    document.querySelector('.close').addEventListener('click', ()=>{
+        document.querySelector('.weather-wrapper').classList.add('passive');
+        document.querySelector('.close').style.display = 'none';
+        document.querySelector('.fa-umbrella').style.display = 'block';
+    })
+}
+closeForecastblock();
+*/
 
 
 
