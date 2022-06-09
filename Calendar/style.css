@@ -190,21 +190,21 @@ h2 {
     z-index: 100;
 }
 
-.close {
+.btn-close {
     display: none;
     cursor: pointer;
     color: #a62cb9;
     font-size: 38px;
     position: absolute;
     left: 350px;
-    user-select: none;
+    z-index: 120;
 }
 
-.close:hover {
+.btn-close:hover {
     color: #ade017;
 }
 
-.close:active {
+.btn-close:active {
     color: #fff;
     transform: scale(0.9);
 }
