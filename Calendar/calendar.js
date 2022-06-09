@@ -2,7 +2,22 @@
 // CALENDAR SECTION //
 
 /// variables ///
+let btn;
+let input;
+let error = 'error';
+let inputValue;
+let cityName = 'Могилёв';
+let widget;
+let iconCode;
+let humidity;
+let weekend;
+let currentTemperature;
+let weatherDescription;
+let currentCityName;
+let windSpeed;
 let body = document.querySelector('body');
+let mainCityData = null;
+let fourDays=[];
 
 // option params
 const option = {
@@ -21,7 +36,13 @@ let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
 console.log(dateInfo);
 
 //render HTML function
-function renderHml() {
+function renderHtml(forecastObj) {
+    currentCityName = forecastObj?.name;
+    windSpeed = Math.round(forecastObj?.wind?.speed);
+    iconCode = forecastObj?.weather[0]?.icon;
+    humidity = forecastObj?.main?.humidity;
+    currentTemperature = Math.round(forecastObj?.main.temp - 273);
+    weatherDescription = forecastObj?.weather[0]?.description;
     document.querySelector('.info-block');
     //HTML-code
     let html = `
@@ -101,8 +122,10 @@ function renderHml() {
     </div>
     <!-- start weather section -->
     <div class="weather-wrapper">
-        <i id="umbrella" class="fa-solid fa-umbrella"></i>
-        <div class="close">CLOSE</div>
+        <div id="umbrella">
+            <i  class="fa-solid fa-umbrella"></i>
+        </div>
+        <div class="btn-close">CLOSE</div>
         <p class="now">The weather is now</p>
         <div class="weather">
             <!--Weather picture-->
@@ -110,21 +133,21 @@ function renderHml() {
                 <img src="./img/03n.svg" alt="icon">
             </div>
             <!--Weather description-->
-                <div class="weather-description">Rain</div>
-                <div class="city-name">Могилёв</div>
+                <div class="weather-description">${weatherDescription}</div>
+                <div class="city-name">${currentCityName}</div>
             <div class="items">
                 <!--Current wind speed-->
                 <div class="part">
                     <p class="param">Wind</p>
                     <img class="wind-img" src="./img/tornado.svg" alt="wind">
-                    <p class="text-part"> 12 m/s</p>
+                    <p class="text-part"> ${windSpeed} m/s</p>
                 </div>
-                <p class="temperature">12&deg;</p>
+                <p class="temperature">${currentTemperature}&deg;</p>
                 <!-- Current Humidity-->
                 <div class="part">
                     <p class="param">Humidity</p>
                     <img class="humidity-img" src="./img/wet.png" alt="humidity-img">
-                    <p class="text-part">60 &#37;</p>
+                    <p class="text-part">${humidity} &#37;</p>
                 </div>
             </div>
             <!--get city input-->
@@ -134,14 +157,14 @@ function renderHml() {
             </div>  
         </div>  
     </div>
-`
+`;
     body.insertAdjacentHTML('afterbegin', html);
+    getOtherCity();
     addArrowHandlers();
+    setEvents();
 }
-
-renderHml();
+renderHtml();
 getDateOfCalendar();
-
 
 // remove temporary classes
 function removeTempClasses() {
@@ -151,11 +174,11 @@ function removeTempClasses() {
     }
     let allmonthcells = document.querySelectorAll('.allmonthcell');
     allmonthcells.forEach(item=>item.classList.remove('allmonthcell'));
-    
 }
 
 /// get dates in cells
 function getDateOfCalendar() {
+    weekend = document.querySelector('.weekend');
     const tempDate = new Date(currentDateInfo);
     tempDate.setDate(1);
     let monthNow = tempDate.getMonth();
@@ -231,33 +254,112 @@ function clearInfo() {
 
 // WEATHER SECTION //
 
-// view the forecast of current day on click
-function vievForecastblock() {
-    document.querySelector('#umbrella').addEventListener('click', () => {
-        document.querySelector('.weather-wrapper').classList.add('active');
-        document.querySelector('#umbrella').style.display = 'none';
-        document.querySelector('.weather-wrapper').classList.add('.close');
-        document.querySelector('.close').style.display = 'block';
-    })
-    document.querySelector('.close').addEventListener('click', ()=>{
-        document.querySelector('.weather-wrapper').classList.add('passive');
-        document.querySelector('.close').style.display = 'none';
-        document.querySelector('.fa-umbrella').style.display = 'block';
-    })
-}
-vievForecastblock();
 
-/*
-// close the forecast of current day on click
-function closeForecastblock() {
-    document.querySelector('.close').addEventListener('click', ()=>{
-        document.querySelector('.weather-wrapper').classList.add('passive');
-        document.querySelector('.close').style.display = 'none';
-        document.querySelector('.fa-umbrella').style.display = 'block';
-    })
+function setEvents(){
+    // view the forecast of current day on click
+    let weatherWrapper = document.querySelector('.weather-wrapper');
+    let close = document.querySelector('.close');
+    document.querySelector('#umbrella').addEventListener('click', () => {
+        // let weatherWrapper = document.querySelector('.weather-wrapper');
+        weatherWrapper.classList.remove('passive');
+        weatherWrapper.classList.add('active','close');
+        document.querySelector('#umbrella').style.display = 'none';
+        // document.querySelector('.weather-wrapper').classList.add('close');
+        weatherWrapper.style.display = 'block';
+        document.querySelector('.btn-close').style.display = 'block';
+    });
+
+//close the forecast of current day on click
+    document.querySelector('.btn-close').addEventListener('click', ()=>{
+        // document.querySelector('.weather-wrapper');
+        weatherWrapper.classList.add('passive');
+        // weatherWrapper.style.display = 'none';
+        document.querySelector('.btn-close').style.display = 'none';
+        // document.querySelector('.weather-wrapper').classList.add('active');
+        document.querySelector('#umbrella').style.display = 'block';
+        weatherWrapper.classList.remove('active','close');
+    });
 }
-closeForecastblock();
-*/
+
+// setEvents();
+
+// Get other city function
+function getOtherCity() {
+    input = document.getElementsByTagName('input');
+    btn = document.getElementById('btn');
+    btn.addEventListener('click', () => {
+        // Get input value
+        inputValue = document.getElementById('inputValue').value;
+        cityName = inputValue;
+        widget = document.querySelector('.weather-wrapper');
+        if (inputValue === '') {
+            return;
+        }
+        (async function (){
+            getCityName(cityName);
+        })();
+    });
+}
+
+// Get city name & response function
+async function getCityName(cityName) {
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`);
+    mainCityData = await response.json();
+    cityName = mainCityData.name;
+    console.log(mainCityData)
+    response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131`);
+    let otherCityData = await response.json();
+    console.log(otherCityData)
+    fourDays = otherCityData.list.filter((item, index) => {
+        return index!==0 && index % 8 === 0;
+    });
+    console.log(fourDays)
+
+    /*let visibleData = {
+        name: mainCityData.name,
+        temp: mainCityData.main.temp,
+        wind: mainCityData.weather[0].wind;
+    }
+    updateWeather(visibleData);*/
+
+}
+
+/**
+ * Создает объект для обновления погода
+ * @param myData Входные данные
+ * @param isDateArr входное значение является ли массивом
+ * @param ind индекс элемента массива по умолчанию
+ */
+function generateWeatherObject(myData, isDateArr=false, ind = 0) {
+    if(!myData) return;
+    if(isDateArr && !myData.length) return;
+
+    let data = null;
+    if(isDateArr){
+        data = {
+            city: cityName,
+            temp: myData[ind].temp,
+        }
+    }
+    else {
+        data = {
+            city: myData.name,
+            temp: myData.main.temp,
+        }
+    }
+
+    updateWeather(data);
+}
+
+/**
+ * Update weather area
+ * @param data Weather data from API
+ */
+function updateWeather(data) {
+    let cityNameBlok = document.querySelector('.city-name');
+    cityNameBlok.innerHTML = data.name;
+}
+
 
 
 
