@@ -35,7 +35,7 @@ function renderHtml(forecastObj, forecastList) {
         </div>
         <!--Weather description-->
         <div class="weather-description">${weatherDescription}</div>
-        <div class="city-name">${currentCityName}</div>
+        <div class="city-name">${cityName}</div>
         <div class="items">
             <!--Curent wind speed-->
             <div class="part">
