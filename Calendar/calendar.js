@@ -6,9 +6,9 @@ let btn;
 let input;
 let error = 'error';
 let inputValue;
-let cityName = 'Могилёв';
-let widget;
-let iconCode;
+let cityName = 'Berlin';
+let weatherWrapper;
+let iconImg;
 let humidity;
 let weekend;
 let currentTemperature;
@@ -16,8 +16,9 @@ let weatherDescription;
 let currentCityName;
 let windSpeed;
 let body = document.querySelector('body');
-let mainCityData = null;
+let mainCityData;
 let fourDays=[];
+let visibleData;
 
 // option params
 const option = {
@@ -36,13 +37,12 @@ let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
 console.log(dateInfo);
 
 //render HTML function
-function renderHtml(forecastObj) {
-    currentCityName = forecastObj?.name;
-    windSpeed = Math.round(forecastObj?.wind?.speed);
-    iconCode = forecastObj?.weather[0]?.icon;
-    humidity = forecastObj?.main?.humidity;
-    currentTemperature = Math.round(forecastObj?.main.temp - 273);
-    weatherDescription = forecastObj?.weather[0]?.description;
+function renderHtml(visibleData) {
+    currentCityName = visibleData?.name;
+    windSpeed = Math.round(visibleData?.wind?.speed);
+    humidity = visibleData?.main?.humidity;
+    currentTemperature = Math.round(visibleData?.main.temp - 273);
+    weatherDescription = visibleData?.weather[0]?.description;
     document.querySelector('.info-block');
     //HTML-code
     let html = `
@@ -130,7 +130,7 @@ function renderHtml(forecastObj) {
         <div class="weather">
             <!--Weather picture-->
             <div class="weather-icon">
-                <img src="./img/03n.svg" alt="icon">
+               
             </div>
             <!--Weather description-->
                 <div class="weather-description">${weatherDescription}</div>
@@ -140,14 +140,14 @@ function renderHtml(forecastObj) {
                 <div class="part">
                     <p class="param">Wind</p>
                     <img class="wind-img" src="./img/tornado.svg" alt="wind">
-                    <p class="text-part"> ${windSpeed} m/s</p>
+                    <p id="windspeed" class="text-part">${windSpeed}</p>
                 </div>
-                <p class="temperature">${currentTemperature}&deg;</p>
+                <p class="temperature">${currentTemperature}</p>
                 <!-- Current Humidity-->
                 <div class="part">
                     <p class="param">Humidity</p>
                     <img class="humidity-img" src="./img/wet.png" alt="humidity-img">
-                    <p class="text-part">${humidity} &#37;</p>
+                    <p id="humidity" class="text-part">${humidity}</p>
                 </div>
             </div>
             <!--get city input-->
@@ -165,6 +165,7 @@ function renderHtml(forecastObj) {
 }
 renderHtml();
 getDateOfCalendar();
+
 
 // remove temporary classes
 function removeTempClasses() {
@@ -252,36 +253,27 @@ function clearInfo() {
     info.innerText = '';
 }
 
-// WEATHER SECTION //
-
+// THE WEATHER SECTION //
 
 function setEvents(){
-    // view the forecast of current day on click
+    // view the forecast of current day by click
     let weatherWrapper = document.querySelector('.weather-wrapper');
-    let close = document.querySelector('.close');
     document.querySelector('#umbrella').addEventListener('click', () => {
-        // let weatherWrapper = document.querySelector('.weather-wrapper');
         weatherWrapper.classList.remove('passive');
         weatherWrapper.classList.add('active','close');
         document.querySelector('#umbrella').style.display = 'none';
-        // document.querySelector('.weather-wrapper').classList.add('close');
         weatherWrapper.style.display = 'block';
         document.querySelector('.btn-close').style.display = 'block';
     });
 
-//close the forecast of current day on click
+//close the forecast of current day by click
     document.querySelector('.btn-close').addEventListener('click', ()=>{
-        // document.querySelector('.weather-wrapper');
         weatherWrapper.classList.add('passive');
-        // weatherWrapper.style.display = 'none';
         document.querySelector('.btn-close').style.display = 'none';
-        // document.querySelector('.weather-wrapper').classList.add('active');
         document.querySelector('#umbrella').style.display = 'block';
         weatherWrapper.classList.remove('active','close');
     });
 }
-
-// setEvents();
 
 // Get other city function
 function getOtherCity() {
@@ -291,7 +283,7 @@ function getOtherCity() {
         // Get input value
         inputValue = document.getElementById('inputValue').value;
         cityName = inputValue;
-        widget = document.querySelector('.weather-wrapper');
+        weatherWrapper = document.querySelector('.weather-wrapper');
         if (inputValue === '') {
             return;
         }
@@ -299,33 +291,85 @@ function getOtherCity() {
             getCityName(cityName);
         })();
     });
+    (async function() {
+        document.querySelector('input').addEventListener('keydown', function(e) {
+            inputValue = document.getElementById('inputValue').value;
+            cityName = inputValue;
+            weatherWrapper = document.querySelector('.weather-wrapper');
+            if (e.keyCode === 13) {
+                (async function (){
+                    getCityName(cityName);
+                })();
+            }
+        });
+    })();
+
 }
+
+
+// default city
+function cityToLocalStorage(item) {
+    let city = getCityName(cityName);
+    localStorage.setItem('city', city);
+}
+cityToLocalStorage(cityName);
+
 
 // Get city name & response function
 async function getCityName(cityName) {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`);
     mainCityData = await response.json();
-    cityName = mainCityData.name;
     console.log(mainCityData)
     response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131`);
     let otherCityData = await response.json();
-    console.log(otherCityData)
     fourDays = otherCityData.list.filter((item, index) => {
         return index!==0 && index % 8 === 0;
     });
-    console.log(fourDays)
+    console.log(fourDays);
 
-    /*let visibleData = {
+    visibleData = {
         name: mainCityData.name,
-        temp: mainCityData.main.temp,
-        wind: mainCityData.weather[0].wind;
+        temp: mainCityData?.main?.temp,
+        wind: mainCityData?.wind.speed,
+        humidity: mainCityData?.main?.humidity,
+        desc: mainCityData?.weather[0]?.description,
+        icon: mainCityData?.weather[0]?.icon,
     }
-    updateWeather(visibleData);*/
-
+    updateWeather(visibleData);
 }
 
+//update weather
+function updateWeather(data) {
+    let cityNameBlok = document.querySelector('.city-name');
+    let currentTemperature = document.querySelector('.temperature');
+    let currentHumidity = document.querySelector('#humidity');
+    let currentWindspeed = document.querySelector('#windspeed');
+    let weatherDescription = document.querySelector('.weather-description');
+    let weatherIcon = document.querySelector('.weather-icon');
+    iconImg = mainCityData?.weather[0]?.icon;
+
+    currentTemperature.innerHTML = Math.round(data.temp-273) + `&deg;`;
+    cityNameBlok.innerHTML = data.name;
+    currentHumidity.innerHTML = data.humidity + '%';
+    currentWindspeed.innerHTML = Math.round(data.wind) + ` ` + `m/s`;
+    weatherDescription.innerHTML = data.desc;
+
+    //add weather icon function and clear icon function
+    function  addWeatherIcon() {
+        clear();
+        //add weather icon
+        weatherIcon.insertAdjacentHTML("beforeend", `
+            <img id="iconPicture" src="./img/${iconImg}.svg" alt="icon">
+        `);
+        //clear icon field function
+        function clear() {
+            document.querySelector('.weather-icon').innerHTML = '';
+        }
+    }
+    addWeatherIcon();
+}
 /**
- * Создает объект для обновления погода
+ * Создает объект для обновления погоды
  * @param myData Входные данные
  * @param isDateArr входное значение является ли массивом
  * @param ind индекс элемента массива по умолчанию
@@ -339,29 +383,18 @@ function generateWeatherObject(myData, isDateArr=false, ind = 0) {
         data = {
             city: cityName,
             temp: myData[ind].temp,
+
         }
     }
     else {
         data = {
             city: myData.name,
             temp: myData.main.temp,
+
         }
     }
-
     updateWeather(data);
 }
-
-/**
- * Update weather area
- * @param data Weather data from API
- */
-function updateWeather(data) {
-    let cityNameBlok = document.querySelector('.city-name');
-    cityNameBlok.innerHTML = data.name;
-}
-
-
-
 
 
 
