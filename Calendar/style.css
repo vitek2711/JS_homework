@@ -148,7 +148,6 @@ h2 {
 
 /* current day */
 .current-day {
-    background-image: none;
     border: 5px solid #9c3ec0;
     border-radius: 50%;
 }
