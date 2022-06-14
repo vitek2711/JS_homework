@@ -6,7 +6,7 @@ let btn;
 let input;
 let error = 'error';
 let inputValue;
-let cityName = 'Berlin';
+let cityName = 'Munich';
 let weatherWrapper;
 let iconImg;
 let humidity;
@@ -37,7 +37,7 @@ let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
 console.log(dateInfo);
 
 //render HTML function
-function renderHtml(visibleData) {
+function renderHtml(visibleData, city) {
     currentCityName = visibleData?.name;
     windSpeed = Math.round(visibleData?.wind?.speed);
     humidity = visibleData?.main?.humidity;
@@ -162,10 +162,19 @@ function renderHtml(visibleData) {
     getOtherCity();
     addArrowHandlers();
     setEvents();
+
+    //checking if there is a city in localstorage
+    (async function () {
+        if(localStorage.hasOwnProperty('storageCity')){
+            await getCityName(localStorage.getItem('storageCity'));
+        }
+        else {
+            await getCityName();
+        }
+    })();
 }
 renderHtml();
 getDateOfCalendar();
-
 
 // remove temporary classes
 function removeTempClasses() {
@@ -266,7 +275,7 @@ function setEvents(){
         document.querySelector('.btn-close').style.display = 'block';
     });
 
-//close the forecast of current day by click
+    //close the forecast of current day by click
     document.querySelector('.btn-close').addEventListener('click', ()=>{
         weatherWrapper.classList.add('passive');
         document.querySelector('.btn-close').style.display = 'none';
@@ -276,47 +285,44 @@ function setEvents(){
 }
 
 // Get other city function
-function getOtherCity() {
-    input = document.getElementsByTagName('input');
+function getOtherCity(city) {
+    document.getElementsByTagName('input');
     btn = document.getElementById('btn');
+    //onclick event
     btn.addEventListener('click', () => {
-        // Get input value
         inputValue = document.getElementById('inputValue').value;
         cityName = inputValue;
         weatherWrapper = document.querySelector('.weather-wrapper');
-        if (inputValue === '') {
-            return;
-        }
         (async function (){
             getCityName(cityName);
+            incorrectValue();
         })();
     });
     (async function() {
         document.querySelector('input').addEventListener('keydown', function(e) {
+            // keydown event
             inputValue = document.getElementById('inputValue').value;
             cityName = inputValue;
             weatherWrapper = document.querySelector('.weather-wrapper');
             if (e.keyCode === 13) {
                 (async function (){
                     getCityName(cityName);
+                    incorrectValue();
                 })();
             }
         });
     })();
 
+    // if incorrect value entered
+    function incorrectValue() {
+        if (inputValue === '') {
+            alert('You did not enter the name of the city');
+        }
+    }
 }
-
-
-// default city
-function cityToLocalStorage(item) {
-    let city = getCityName(cityName);
-    localStorage.setItem('city', city);
-}
-cityToLocalStorage(cityName);
-
 
 // Get city name & response function
-async function getCityName(cityName) {
+async function getCityName(cityName = 'Munich') {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`);
     mainCityData = await response.json();
     console.log(mainCityData)
@@ -336,6 +342,10 @@ async function getCityName(cityName) {
         icon: mainCityData?.weather[0]?.icon,
     }
     updateWeather(visibleData);
+
+    //add city to localstorage
+    localStorage.removeItem('storageCity');
+    localStorage.setItem('storageCity', cityName);
 }
 
 //update weather
@@ -361,19 +371,19 @@ function updateWeather(data) {
         weatherIcon.insertAdjacentHTML("beforeend", `
             <img id="iconPicture" src="./img/${iconImg}.svg" alt="icon">
         `);
-        //clear icon field function
+        //clear the field of icon function
         function clear() {
             document.querySelector('.weather-icon').innerHTML = '';
         }
     }
     addWeatherIcon();
 }
-/**
+/*/!**
  * Создает объект для обновления погоды
  * @param myData Входные данные
  * @param isDateArr входное значение является ли массивом
  * @param ind индекс элемента массива по умолчанию
- */
+ *!/
 function generateWeatherObject(myData, isDateArr=false, ind = 0) {
     if(!myData) return;
     if(isDateArr && !myData.length) return;
@@ -394,7 +404,7 @@ function generateWeatherObject(myData, isDateArr=false, ind = 0) {
         }
     }
     updateWeather(data);
-}
+}*/
 
 
 
