@@ -334,3 +334,9 @@ h2 {
     left: 0;
     transition: left 1s;
 }
+
+.weather-marker {
+    width: 15px;
+    height: 15px;
+    color: #4ddc69;
+}
