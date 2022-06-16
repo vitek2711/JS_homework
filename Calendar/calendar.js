@@ -21,6 +21,7 @@ let fourDays=[];
 let visibleData;
 let visibleForecastData;
 let forecastDate1;
+let forecastTemp1;
 
 // option params
 const option = {
@@ -40,7 +41,6 @@ console.log(dateInfo);
 
 //render HTML function
 function renderHtml(visibleData, visibleForecastData) {
-
     //variables for the current day forecast
     currentCityName = visibleData?.name;
     windSpeed = Math.round(visibleData?.wind?.speed);
@@ -51,7 +51,7 @@ function renderHtml(visibleData, visibleForecastData) {
 
     //variables for the forecast section
     forecastDate1 = visibleForecastData?.date;
-    forecastTemp1 = visibleForecastData?.temp;
+    forecastTemp1 = visibleForecastData?.temperature;
 
     //HTML-code
     let html = `
@@ -390,8 +390,8 @@ async function getCityName(cityName = 'Munich') {
     visibleForecastData = {
         // forecast for first day
         date: fourDays[0].dt_txt.split(' ')[0].slice(0,10),
-        icon: fourDays[0].weather[0].icon,
-        temp: fourDays[0].main.temp,
+        // icon: fourDays[0].weather[0].icon,
+        temperature: fourDays[0].main?.temp,
     }
     updateWeatherForecast(visibleForecastData);
 }
@@ -399,12 +399,12 @@ async function getCityName(cityName = 'Munich') {
 //update weather forecast for four days
 function updateWeatherForecast(fdata) {
     let forecastDate = document.querySelector('.date');
-    let forecastIcon = document.querySelector('.forecast-icon');
+    /*let forecastIcon = document.querySelector('.forecast-icon');*/
     let forecastTemperature = document.querySelector('.forecast-temp');
 
     // for weather forecast block
-    forecastDate.innerHTML = fdata.date;
-    forecastTemperature.innnerHTML=fdata;
+    forecastDate.innerHTML = fdata?.date;
+    forecastTemperature.innnerHTML = fdata?.temperature;
 }
 
 //update weather by current day
