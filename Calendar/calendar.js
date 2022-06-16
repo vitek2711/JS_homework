@@ -19,6 +19,8 @@ let body = document.querySelector('body');
 let mainCityData;
 let fourDays=[];
 let visibleData;
+let visibleForecastData;
+let forecastDate1;
 
 // option params
 const option = {
@@ -37,13 +39,20 @@ let dateInfo = currentDateInfo.toLocaleString('en-EN', option);
 console.log(dateInfo);
 
 //render HTML function
-function renderHtml(visibleData, city) {
+function renderHtml(visibleData, visibleForecastData) {
+
+    //variables for the current day forecast
     currentCityName = visibleData?.name;
     windSpeed = Math.round(visibleData?.wind?.speed);
     humidity = visibleData?.main?.humidity;
     currentTemperature = Math.round(visibleData?.main.temp - 273);
     weatherDescription = visibleData?.weather[0]?.description;
     document.querySelector('.info-block');
+
+    //variables for the forecast section
+    forecastDate1 = visibleForecastData?.date;
+    forecastTemp1 = visibleForecastData?.temp;
+
     //HTML-code
     let html = `
      <!-- title -->
@@ -157,6 +166,30 @@ function renderHtml(visibleData, city) {
             </div>  
         </div>  
     </div>
+    <!-- start forecast section -->
+    <div class="forecast">
+        <p class="now">Wether forecast for four days</p>
+        <div class="forecast-block">
+                <p class="date">${forecastDate1}</p>
+                <img class="forecast-icon" src="./img/01d.svg" alt="icon">
+                <p class="forecast-temp">${forecastTemp1}</p>
+        </div>
+        <div class="forecast-block">
+                <p class="date"></p>
+                <img class="forecast-icon" src="./img/01d.svg" alt="icon">
+                <p class="forecast-temp">19&deg;</p>
+        </div>
+        <div class="forecast-block">
+                <p class="date">15.06.2022</p>
+                <img class="forecast-icon" src="./img/01d.svg" alt="icon">
+                <p class="forecast-temp">19&deg;</p>
+        </div>
+        <div class="forecast-block">
+                <p class="date">15.06.2022</p>
+                <img class="forecast-icon" src="./img/01d.svg" alt="icon">
+                <p class="forecast-temp">19&deg;</p>
+        </div>
+    </div>
 `;
     body.insertAdjacentHTML('afterbegin', html);
     getOtherCity();
@@ -267,7 +300,10 @@ function clearInfo() {
 function setEvents(){
     // view the forecast of current day by click
     let weatherWrapper = document.querySelector('.weather-wrapper');
+    let forecastWrapper = document.querySelector('.forecast');
     document.querySelector('#umbrella').addEventListener('click', () => {
+        forecastWrapper.classList.remove('passive-for');
+        forecastWrapper.classList.add('active-for');
         weatherWrapper.classList.remove('passive');
         weatherWrapper.classList.add('active','close');
         document.querySelector('#umbrella').style.display = 'none';
@@ -277,6 +313,8 @@ function setEvents(){
 
     //close the forecast of current day by click
     document.querySelector('.btn-close').addEventListener('click', ()=>{
+        forecastWrapper.classList.remove('active-for');
+        forecastWrapper.classList.add('passive-for');
         weatherWrapper.classList.add('passive');
         document.querySelector('.btn-close').style.display = 'none';
         document.querySelector('#umbrella').style.display = 'block';
@@ -288,6 +326,8 @@ function setEvents(){
 function getOtherCity(city) {
     document.getElementsByTagName('input');
     btn = document.getElementById('btn');
+
+
     //onclick event
     btn.addEventListener('click', () => {
         inputValue = document.getElementById('inputValue').value;
@@ -325,13 +365,17 @@ function getOtherCity(city) {
 async function getCityName(cityName = 'Munich') {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131&lang`);
     mainCityData = await response.json();
-    console.log(mainCityData)
+    console.log(mainCityData);
     response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=6a7a4d30f99d918e2254ddc1a283a131`);
     let otherCityData = await response.json();
     fourDays = otherCityData.list.filter((item, index) => {
         return index!==0 && index % 8 === 0;
     });
     console.log(fourDays);
+
+    //add city to localstorage
+    localStorage.removeItem('storageCity');
+    localStorage.setItem('storageCity', cityName);
 
     visibleData = {
         name: mainCityData.name,
@@ -343,21 +387,37 @@ async function getCityName(cityName = 'Munich') {
     }
     updateWeather(visibleData);
 
-    //add city to localstorage
-    localStorage.removeItem('storageCity');
-    localStorage.setItem('storageCity', cityName);
+    visibleForecastData = {
+        // forecast for first day
+        date: fourDays[0].dt_txt.split(' ')[0].slice(0,10),
+        icon: fourDays[0].weather[0].icon,
+        temp: fourDays[0].main.temp,
+    }
+    updateWeatherForecast(visibleForecastData);
 }
 
-//update weather
+//update weather forecast for four days
+function updateWeatherForecast(fdata) {
+    let forecastDate = document.querySelector('.date');
+    let forecastIcon = document.querySelector('.forecast-icon');
+    let forecastTemperature = document.querySelector('.forecast-temp');
+
+    // for weather forecast block
+    forecastDate.innerHTML = fdata.date;
+    forecastTemperature.innnerHTML=fdata;
+}
+
+//update weather by current day
 function updateWeather(data) {
+    // for current day block
     let cityNameBlok = document.querySelector('.city-name');
     let currentTemperature = document.querySelector('.temperature');
     let currentHumidity = document.querySelector('#humidity');
     let currentWindspeed = document.querySelector('#windspeed');
     let weatherDescription = document.querySelector('.weather-description');
     let weatherIcon = document.querySelector('.weather-icon');
-    iconImg = mainCityData?.weather[0]?.icon;
 
+    iconImg = mainCityData?.weather[0]?.icon;
     currentTemperature.innerHTML = Math.round(data.temp-273) + `&deg;`;
     cityNameBlok.innerHTML = data.name;
     currentHumidity.innerHTML = data.humidity + '%';
